@@ -1,7 +1,7 @@
 // DAFCER Landing Page Scripts
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Register GSAP Plugins
     gsap.registerPlugin(ScrollTrigger);
 
@@ -9,31 +9,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = () => {
         const tl = gsap.timeline();
 
+        // Initial state for reveals
+        gsap.set(".reveal", { opacity: 0, y: 50 });
+
         tl.to("#loader-text", {
             opacity: 1,
             duration: 1,
             ease: "power2.out"
         })
-        .to("#loader-bar", {
-            width: "100%",
-            duration: 1.5,
-            ease: "expo.inOut"
-        }, "-=0.5")
-        .to("#preloader", {
-            y: "-100%",
-            duration: 1,
-            ease: "expo.inOut"
-        })
-        .from(".reveal", {
-            y: 50,
-            opacity: 0,
-            duration: 1.2,
-            stagger: 0.2,
-            ease: "power4.out"
-        }, "-=0.5");
+            .to("#loader-bar", {
+                width: "100%",
+                duration: 1.5,
+                ease: "expo.inOut"
+            }, "-=0.5")
+            .to("#preloader", {
+                y: "-100%",
+                duration: 1,
+                ease: "expo.inOut"
+            })
+            .to(".reveal", {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out",
+                startAt: { y: 50, opacity: 0 }
+            }, "-=0.5");
     };
 
-    window.addEventListener('load', preloader);
+    preloader();
 
     // 2. Navigation Scroll Effect
     const nav = document.getElementById('main-nav');
@@ -47,28 +51,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Mobile Menu Toggle
     const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
     let isMenuOpen = false;
 
-    menuToggle.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-        mobileMenu.classList.toggle('active');
+    const toggleMenu = (open) => {
+        isMenuOpen = open;
+        mobileMenu.classList.toggle('active', isMenuOpen);
         
-        // Change icon (simple rotation)
+        // Change icon to X
+        if (isMenuOpen) {
+            menuToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+        } else {
+            menuToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+        }
+
         gsap.to(menuToggle, {
-            rotate: isMenuOpen ? 90 : 0,
+            rotate: isMenuOpen ? 180 : 0,
             duration: 0.3
         });
-    });
+        
+        // Prevent scroll when menu is open
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    };
+
+    menuToggle.addEventListener('click', () => toggleMenu(!isMenuOpen));
+    if (menuClose) menuClose.addEventListener('click', () => toggleMenu(false));
 
     // Close menu on link click
     const mobileLinks = mobileMenu.querySelectorAll('a');
     mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            isMenuOpen = false;
-            gsap.to(menuToggle, { rotate: 0, duration: 0.3 });
-        });
+        link.addEventListener('click', () => toggleMenu(false));
     });
 
     // 4. Hero Parallax
@@ -84,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 5. Scroll Animations for Sections
-    
+
     // Section Titles
     gsap.utils.toArray('.section-title').forEach(title => {
         gsap.from(title, {
@@ -117,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Image Reveal with Scale
     gsap.utils.toArray('.reveal-img').forEach(container => {
         const img = container.querySelector('img');
-        
+
         gsap.from(container, {
             scrollTrigger: {
                 trigger: container,
@@ -158,11 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const btn = contactForm.querySelector('button');
             const originalText = btn.innerText;
             const data = new FormData(contactForm);
-            
+
             btn.innerText = "ENVIANDO...";
             btn.disabled = true;
 
@@ -184,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.innerText = "ERROR AL ENVIAR";
                 btn.classList.add('bg-red-600', 'text-white');
             }
-            
+
             setTimeout(() => {
                 btn.innerText = originalText;
                 btn.disabled = false;
