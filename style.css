@@ -1,0 +1,124 @@
+/* Custom Design System for DAFCER */
+
+:root {
+    --primary: #F3811F;
+    --secondary: #F4821F;
+    --accent: #5C5A5D;
+    --dark: #000000;
+}
+
+/* Base Styles */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Typography Effects */
+.font-display {
+    letter-spacing: -0.03em;
+}
+
+.stroke-text {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+    transition: -webkit-text-stroke 0.5s ease;
+}
+
+h1:hover .stroke-text {
+    -webkit-text-stroke: 1px var(--primary);
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+}
+
+/* Animations */
+@keyframes scrollDown {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+}
+
+.animate-scroll {
+    animation: scrollDown 2s infinite ease-in-out;
+}
+
+/* Glassmorphism */
+.glass {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section Depth */
+#hero-img {
+    filter: brightness(0.6) contrast(1.1);
+    will-change: transform;
+}
+
+/* Project Cards */
+.project-card {
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Navigation State */
+#main-nav.scrolled {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom Selection */
+::selection {
+    background: var(--primary);
+    color: var(--dark);
+}
+
+/* Form Styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--dark) inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+/* Reveal Animations Classes */
+.reveal, .reveal-img {
+    opacity: 0;
+}
+
+/* Mobile Menu */
+#mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Responsiveness Tweaks */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 3.5rem;
+    }
+}

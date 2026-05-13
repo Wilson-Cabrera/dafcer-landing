@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFCER | Próximamente</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#F3811F',
+                        dark: '#000000',
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        /* Ken Burns Slider */
+        .kb-slider {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .kb-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .kb-slide.active {
+            opacity: 1;
+        }
+
+        .kb-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: kenburns 20s ease-in-out infinite alternate;
+        }
+
+        .kb-slide:nth-child(1) img {
+            animation-delay: 0s;
+            transform-origin: center center;
+        }
+
+        .kb-slide:nth-child(2) img {
+            animation-delay: -5s;
+            transform-origin: top left;
+        }
+
+        .kb-slide:nth-child(3) img {
+            animation-delay: -10s;
+            transform-origin: bottom right;
+        }
+
+        @keyframes kenburns {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* Dark overlay on top of images */
+        .kb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85));
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white font-body overflow-hidden">
+
+    <div class="relative h-screen w-full flex flex-col items-center justify-center px-6">
+
+        <!-- Ken Burns Background Slider -->
+        <div class="kb-slider" id="kb-slider">
+            <div class="kb-slide active">
+                <img src="assets/img/hero-bg.jpg" alt="Arquitectura moderna">
+            </div>
+            <div class="kb-slide">
+                <img src="assets/img/slide-team.jpg" alt="Equipo DAFCER">
+            </div>
+            <div class="kb-slide">
+                <img src="assets/img/slide-machinery.png" alt="Maquinaria pesada">
+            </div>
+            <div class="kb-overlay"></div>
+        </div>
+
+        <!-- Abstract Background Shape -->
+        <div class="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
+            <div
+                class="absolute -top-[20%] -left-[10%] text-[40vw] font-display font-black text-white/[0.02] select-none leading-none rotate-12">
+                CONSTRUCCIÓN</div>
+            <div
+                class="absolute -bottom-[20%] -right-[10%] text-[40vw] font-display font-black text-primary/[0.02] select-none leading-none -rotate-12">
+                EXCELENCIA</div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col items-center justify-between h-full w-full max-w-2xl py-12">
+            
+            <!-- Spacer -->
+            <div class="hidden md:block"></div>
+
+            <!-- Main Content -->
+            <div class="flex flex-col items-center text-center w-full">
+                <!-- Logo -->
+                <div id="cs-logo" class="mb-10 md:mb-14 opacity-0">
+                    <img src="assets/img/logo.svg" alt="DAFCER Logo" class="h-24 md:h-32 w-auto">
+                </div>
+
+                <span id="cs-tagline"
+                    class="inline-block px-4 py-1 border border-primary text-primary text-xs font-bold tracking-[0.3em] uppercase mb-8 opacity-0">Próximamente</span>
+
+                <h1 id="cs-title"
+                    class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] mb-8 opacity-0">
+                    EL FUTURO SE ESTÁ <br>
+                    <span class="text-transparent stroke-text">CONSTRUYENDO.</span>
+                </h1>
+
+                <p id="cs-desc" class="text-base md:text-lg text-white/60 mb-10 max-w-md opacity-0">
+                    Estamos construyendo una nueva experiencia digital para mostrar la calidad, trayectoria y compromiso que
+                    nos representa en cada obra.
+                </p>
+
+                <!-- Newsletter Form -->
+                <form id="cs-form" action="https://formspree.io/f/xrejdpbq" method="POST"
+                    class="w-full flex flex-col md:flex-row gap-4 opacity-0">
+                    <input type="email" name="email" placeholder="Tu correo electrónico" required
+                        class="flex-grow bg-white/5 border border-white/10 px-6 py-4 focus:border-primary focus:outline-none transition-all text-white placeholder:text-white/30">
+                    <button type="submit"
+                        class="bg-primary text-dark font-bold px-8 py-4 hover:bg-white transition-all duration-300 uppercase tracking-widest text-sm">Notificarme</button>
+                </form>
+            </div>
+
+            <!-- Bottom Content -->
+            <div class="flex flex-col items-center gap-10 w-full mt-12 md:mt-20">
+                <!-- Social Links -->
+                <div id="cs-social" class="flex gap-8 opacity-0">
+                    <a href="https://www.instagram.com/dafcer.servicios/" target="_blank"
+                        class="text-white/40 hover:text-primary transition-colors uppercase text-[10px] tracking-widest font-bold">Instagram</a>
+                    <a href="https://wa.me/5492996035875" target="_blank"
+                        class="text-white/40 hover:text-primary transition-colors uppercase text-[10px] tracking-widest font-bold">WhatsApp</a>
+                    <a href="https://www.facebook.com/share/1Ey2xsErUL/" target="_blank"
+                        class="text-white/40 hover:text-primary transition-colors uppercase text-[10px] tracking-widest font-bold">Facebook</a>
+                </div>
+
+                <!-- Footer Info -->
+                <div class="text-[10px] text-white/20 uppercase tracking-[0.4em] opacity-0" id="cs-footer">
+                    DAFCER Construcciones y servicios © 2026
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP Logic for Coming Soon -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+            tl.to("#cs-logo", { opacity: 1, y: 0, duration: 1.5, startAt: { y: 20 } })
+                .to("#cs-tagline", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=1")
+                .to("#cs-title", { opacity: 1, y: 0, duration: 1.5, startAt: { y: 30 } }, "-=0.8")
+                .to("#cs-desc", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=1")
+                .to("#cs-form", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=0.8")
+                .to(["#cs-social", "#cs-footer"], { opacity: 1, duration: 1, stagger: 0.2 }, "-=0.5");
+
+            // Ken Burns Slider
+            const slides = document.querySelectorAll('.kb-slide');
+            let current = 0;
+
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 6000);
+
+            // Form handler
+            const form = document.getElementById('cs-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button');
+                const data = new FormData(form);
+
+                btn.innerText = "ENVIANDO...";
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        btn.innerText = "¡LISTO!";
+                        btn.classList.add('bg-white');
+                        form.reset();
+                    } else {
+                        throw new Error('Error en el envío');
+                    }
+                } catch (error) {
+                    btn.innerText = "ERROR";
+                    btn.classList.add('bg-red-500');
+                }
+
+                setTimeout(() => {
+                    btn.innerText = "NOTIFICARME";
+                    btn.disabled = false;
+                    btn.classList.remove('bg-white', 'bg-red-500');
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+
+</html>
