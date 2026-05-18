@@ -36,13 +36,9 @@ body {
 }
 
 .stroke-text {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
     color: transparent;
     transition: -webkit-text-stroke 0.5s ease;
-}
-
-h1:hover .stroke-text {
-    -webkit-text-stroke: 1px var(--primary);
 }
 
 .vertical-text {
@@ -50,27 +46,28 @@ h1:hover .stroke-text {
 }
 
 /* Animations */
-@keyframes scrollDown {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(200%); }
+@keyframes progressMove {
+    0% { transform: scaleX(0); transform-origin: left; }
+    45% { transform: scaleX(1); transform-origin: left; }
+    50% { transform: scaleX(1); transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
 }
 
-.animate-scroll {
-    animation: scrollDown 2s infinite ease-in-out;
+.animate-progress {
+    animation: progressMove 3s infinite cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 /* Glassmorphism */
 .glass {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Hero Section Depth */
-#hero-img {
-    filter: brightness(0.6) contrast(1.1);
-    will-change: transform;
+#hero-canvas {
+    filter: brightness(0.7) contrast(1.1);
 }
 
 /* Project Cards */
@@ -128,18 +125,6 @@ input:-webkit-autofill:active {
         font-size: 2.8rem;
         line-height: 1.1;
     }
-    
-    .grid {
-        display: grid !important;
-    }
-}
-    
-    /* Adjust watermark */
-    #beneficios .absolute {
-        font-size: 35vw;
-        right: -10vw;
-        opacity: 0.03;
-    }
 }
 
 @media (max-width: 640px) {
@@ -147,7 +132,6 @@ input:-webkit-autofill:active {
         font-size: 2.5rem;
     }
     
-    /* Adjust spacing */
     section {
         padding-top: 4rem !important;
         padding-bottom: 4rem !important;

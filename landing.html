@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAFCER | Constructora & Arquitectura de Vanguardia</title>
-    <meta name="description" content="DAFCER Constructora: Líderes en construcción de lujo y proyectos comerciales. Calidad, diseño y solidez en cada estructura.">
-    
+    <meta name="description"
+        content="DAFCER Constructora: Líderes en construcción de lujo y proyectos comerciales. Calidad, diseño y solidez en cada estructura.">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -42,81 +46,158 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
+
 <body class="bg-dark text-white font-body selection:bg-primary selection:text-dark overflow-x-hidden">
 
     <!-- Preloader -->
     <div id="preloader" class="fixed inset-0 z-[100] bg-dark flex items-center justify-center">
         <div class="relative">
-            <span class="text-4xl md:text-6xl font-display font-extrabold tracking-tighter opacity-0" id="loader-text">DAFCER</span>
+            <span class="text-4xl md:text-6xl font-display font-extrabold tracking-tighter opacity-0"
+                id="loader-text">DAFCER</span>
             <div class="absolute bottom-0 left-0 h-1 bg-primary w-0" id="loader-bar"></div>
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center transition-all duration-500" id="main-nav">
+    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center transition-all duration-500"
+        id="main-nav">
         <a href="#" class="flex items-center group">
-            <img src="assets/img/logo.svg" alt="DAFCER" class="h-10 md:h-14 w-auto transition-transform duration-500 group-hover:scale-110">
+            <img src="assets/img/logo.svg" alt="DAFCER"
+                class="h-10 md:h-14 w-auto transition-transform duration-500 group-hover:scale-110">
         </a>
-        
+
         <div class="hidden md:flex gap-10 items-center">
-            <a href="#servicios" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Servicios</a>
-            <a href="#proyectos" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Proyectos</a>
-            <a href="#beneficios" class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Nosotros</a>
-            <a href="#contacto" class="bg-primary text-dark px-6 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm">CONTACTO</a>
+            <a href="#servicios"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Servicios</a>
+            <a href="#proyectos"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Proyectos</a>
+            <a href="#beneficios"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Nosotros</a>
+            <a href="#contacto"
+                class="bg-primary text-dark px-8 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm text-xs tracking-widest">CONTACTO</a>
         </div>
 
         <button class="md:hidden text-3xl" id="menu-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
         </button>
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-[49] bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500">
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[49] bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500">
         <button class="absolute top-8 right-8 text-4xl text-white" id="menu-close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
         </button>
-        <a href="#servicios" class="text-3xl md:text-4xl font-display font-bold hover:text-primary transition-colors">Servicios</a>
-        <a href="#proyectos" class="text-3xl md:text-4xl font-display font-bold hover:text-primary transition-colors">Proyectos</a>
-        <a href="#beneficios" class="text-3xl md:text-4xl font-display font-bold hover:text-primary transition-colors">Nosotros</a>
-        <a href="#contacto" class="text-3xl md:text-4xl font-display font-bold text-primary">Contacto</a>
+        <a href="#servicios"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Servicios</a>
+        <a href="#proyectos"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Proyectos</a>
+        <a href="#beneficios"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Nosotros</a>
+        <a href="#contacto" class="text-3xl md:text-4xl font-display font-extrabold text-primary uppercase">Contacto</a>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center px-6 md:px-12 overflow-hidden">
-        <!-- Background with Parallax -->
-        <div class="absolute inset-0 z-0">
-            <img src="assets/img/hero-bg.jpg" alt="Construcción de lujo" class="w-full h-full object-cover scale-110 opacity-40" id="hero-img">
-            <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/60 to-transparent"></div>
+    <!-- Hero Section: Pure Cinematic Visual -->
+    <section id="hero-section" class="relative h-screen flex flex-col justify-end pb-12 px-6 md:px-12 overflow-hidden bg-dark">
+        <!-- Background Media Container -->
+        <div class="absolute inset-0 z-0 bg-dark">
+            <div class="absolute inset-0 z-10 opacity-15 pointer-events-none mix-blend-soft-light"
+                style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+            <canvas id="hero-canvas" class="w-full h-full object-cover opacity-80"></canvas>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent pointer-events-none"></div>
         </div>
 
-        <div class="relative z-10 max-w-4xl">
-            <span class="inline-block px-4 py-1 border border-primary text-primary text-xs font-bold tracking-widest uppercase mb-6 reveal">Excelencia en Construcción</span>
-            <h1 class="text-5xl md:text-8xl font-display font-extrabold leading-[0.9] tracking-tighter mb-8 reveal">
-                TRANSFORMAMOS <br>
-                <span class="text-transparent stroke-text">VISIONES EN</span> <br>
-                ESTRUCTURAS.
-            </h1>
-            <p class="text-lg md:text-xl text-accent max-w-xl mb-10 leading-relaxed reveal">
-                Construimos el futuro con la precisión de la ingeniería moderna y la elegancia del diseño arquitectónico premium. Proyectos que trascienden el tiempo.
-            </p>
-            <div class="flex flex-wrap gap-6 reveal">
-                <a href="#contacto" class="group relative bg-primary text-dark px-10 py-5 font-bold text-lg overflow-hidden transition-all duration-300">
-                    <span class="relative z-10">INICIAR PROYECTO</span>
-                    <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </a>
-                <a href="#proyectos" class="group flex items-center gap-4 text-white hover:text-primary transition-colors py-5">
-                    <span class="font-bold tracking-widest">VER PROYECTOS</span>
-                    <div class="w-12 h-[2px] bg-white group-hover:bg-primary transition-all"></div>
-                </a>
+        <!-- Technical Margin Data -->
+        <div class="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 flex flex-col gap-24 hidden md:flex reveal">
+            <div class="vertical-text text-[10px] uppercase tracking-[0.5em] text-white/30 font-mono">
+                Lat: 34.6037° S / Long: 58.3816° W
+            </div>
+            <div class="vertical-text text-[10px] uppercase tracking-[0.5em] text-white/30 font-mono">
+                Identity: DAFCER.v2.2026
             </div>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-12 hidden md:flex items-center gap-4 reveal">
-            <div class="w-[1px] h-20 bg-accent/30 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1/2 bg-primary animate-scroll"></div>
+        <div class="relative z-10 flex justify-center reveal pointer-events-none">
+            <div class="flex flex-col items-center gap-4">
+                <span class="text-[10px] uppercase tracking-[0.4em] text-white/50">Scroll to Begin</span>
+                <div class="w-[1px] h-20 bg-white/10 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-full bg-primary animate-scroll"></div>
+                </div>
             </div>
-            <span class="text-[10px] uppercase tracking-[0.3em] vertical-text text-accent">Desliza para explorar</span>
+        </div>
+    </section>
+
+    <!-- Intro Section: Dignified Architectural Entry -->
+    <section id="intro" class="relative py-40 px-6 md:px-12 bg-dark overflow-hidden">
+        <!-- Background Grid Element -->
+        <div class="absolute inset-0 z-0 opacity-10 pointer-events-none"
+            style="background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px); background-size: 80px 80px;">
+        </div>
+
+        <!-- Large Subtle Watermark -->
+        <div
+            class="absolute -bottom-20 -right-20 text-[25vw] font-display font-black text-white/[0.02] select-none pointer-events-none leading-none">
+            DAFCER</div>
+
+        <div class="relative z-10 max-w-7xl mx-auto">
+            <div class="flex flex-col gap-20">
+
+                <!-- Title Block -->
+                <div class="max-w-4xl reveal">
+                    <div class="flex items-center gap-6 mb-12">
+                        <span class="text-xs font-bold tracking-[0.6em] uppercase text-primary">Estableciendo el
+                            Estándar</span>
+                        <div class="h-[1px] flex-grow bg-white/10"></div>
+                    </div>
+
+                    <h2
+                        class="text-1xl md:text-xl lg:text-8xl font-display font-extrabold leading-[0.95] tracking-tighter uppercase">
+                        Gestión y ejecución <br>
+                        <span class="stroke-text italic">de proyectos</span> <br>
+                        constructivos.
+                    </h2>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+                    <div class="md:col-span-6 reveal">
+                        <div class="flex gap-10 items-start">
+                            <div class="w-12 h-[1px] bg-primary mt-4 hidden md:block"></div>
+                            <p
+                                class="text-xl md:text-2xl font-body font-light tracking-wide text-white/70 leading-relaxed">
+                                Somos un <span class="text-white font-medium">Estudio de Ingeniería &
+                                    Construcción</span> dedicado a brindar soluciones integrales en todo el territorio
+                                nacional argentino con <span class="text-primary italic">precisión técnica</span>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-6 flex md:justify-end reveal">
+                        <div class="flex flex-col items-start md:items-end gap-12">
+                            <div class="w-24 h-[1px] bg-white/20 hidden md:block"></div>
+                            <a href="#servicios"
+                                class="group relative py-6 px-12 border border-white/10 overflow-hidden transition-all duration-700 hover:border-primary">
+                                <span
+                                    class="relative z-10 text-xs font-bold tracking-[0.4em] uppercase group-hover:text-dark transition-colors">Ver
+                                    Servicios</span>
+                                <div
+                                    class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -130,7 +211,8 @@
             </div>
             <div class="md:col-span-5">
                 <p class="text-lg text-accent leading-relaxed">
-                    Ofrecemos soluciones integrales desde la concepción arquitectónica hasta la ejecución final, garantizando los más altos estándares de calidad y seguridad en cada etapa.
+                    Ofrecemos soluciones integrales desde la concepción arquitectónica hasta la ejecución final,
+                    garantizando los más altos estándares de calidad y seguridad en cada etapa.
                 </p>
             </div>
         </div>
@@ -139,22 +221,28 @@
             <!-- Service 1 -->
             <div class="bg-white p-12 hover:bg-dark group transition-all duration-500 cursor-default">
                 <span class="text-primary font-display font-bold text-2xl mb-12 block">01</span>
-                <h3 class="text-3xl font-display font-bold mb-6 group-hover:text-white transition-colors">Residencial de Lujo</h3>
-                <p class="text-accent group-hover:text-white/60 transition-colors mb-8">Diseño y construcción de hogares exclusivos que combinan confort, estética y tecnología de vanguardia.</p>
+                <h3 class="text-3xl font-display font-bold mb-6 group-hover:text-white transition-colors">Residencial de
+                    Lujo</h3>
+                <p class="text-accent group-hover:text-white/60 transition-colors mb-8">Diseño y construcción de hogares
+                    exclusivos que combinan confort, estética y tecnología de vanguardia.</p>
                 <div class="w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500"></div>
             </div>
             <!-- Service 2 -->
             <div class="bg-white p-12 hover:bg-dark group transition-all duration-500 cursor-default">
                 <span class="text-primary font-display font-bold text-2xl mb-12 block">02</span>
-                <h3 class="text-3xl font-display font-bold mb-6 group-hover:text-white transition-colors">Edificios Comerciales</h3>
-                <p class="text-accent group-hover:text-white/60 transition-colors mb-8">Estructuras funcionales y modernas diseñadas para optimizar el rendimiento de negocios y espacios corporativos.</p>
+                <h3 class="text-3xl font-display font-bold mb-6 group-hover:text-white transition-colors">Edificios
+                    Comerciales</h3>
+                <p class="text-accent group-hover:text-white/60 transition-colors mb-8">Estructuras funcionales y
+                    modernas diseñadas para optimizar el rendimiento de negocios y espacios corporativos.</p>
                 <div class="w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500"></div>
             </div>
             <!-- Service 3 -->
             <div class="bg-white p-12 hover:bg-dark group transition-all duration-500 cursor-default">
                 <span class="text-primary font-display font-bold text-2xl mb-12 block">03</span>
-                <h3 class="text-3xl font-display font-bold mb-6 group-hover:text-white transition-colors">Remodelación Premium</h3>
-                <p class="text-accent group-hover:text-white/60 transition-colors mb-8">Transformamos espacios existentes en ambientes de lujo con acabados de primera y redistribución inteligente.</p>
+                <h3 class="text-3xl font-display font-bold mb-6 group-hover:text-white transition-colors">Remodelación
+                    Premium</h3>
+                <p class="text-accent group-hover:text-white/60 transition-colors mb-8">Transformamos espacios
+                    existentes en ambientes de lujo con acabados de primera y redistribución inteligente.</p>
                 <div class="w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500"></div>
             </div>
         </div>
@@ -164,8 +252,10 @@
     <section id="proyectos" class="py-32 px-6 md:px-12 bg-dark">
         <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-10">
             <div>
-                <span class="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">Portafolio Seleccionado</span>
-                <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter">OBRAS MAESTRAS</h2>
+                <span class="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">Portafolio
+                    Seleccionado</span>
+                <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter py-2 leading-tight">OBRAS
+                    MAESTRAS</h2>
             </div>
             <div class="text-right">
                 <a href="#" class="inline-flex items-center gap-4 text-white hover:text-primary transition-colors">
@@ -179,9 +269,13 @@
             <!-- Project 1 -->
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Residencial">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/project-residential.png" alt="Residencia Aurora" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                        <span class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver Proyecto</span>
+                    <img src="assets/img/project-residential.png" alt="Residencia Aurora"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <span
+                            class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver
+                            Proyecto</span>
                     </div>
                 </div>
                 <div class="mt-8 flex justify-between items-start">
@@ -193,11 +287,15 @@
             </div>
 
             <!-- Project 2 -->
-            <div class="project-card group cursor-pointer overflow-hidden mt-0 md:mt-24" data-category="Comercial">
+            <div class="project-card group cursor-pointer overflow-hidden" data-category="Comercial">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/project-commercial.png" alt="Torre Corporativa Delta" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                        <span class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver Proyecto</span>
+                    <img src="assets/img/project-commercial.png" alt="Torre Corporativa Delta"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <span
+                            class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver
+                            Proyecto</span>
                     </div>
                 </div>
                 <div class="mt-8 flex justify-between items-start">
@@ -211,9 +309,13 @@
             <!-- Project 3 -->
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Renovación">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/project-renovation.png" alt="Loft Industrial Soho" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                        <span class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver Proyecto</span>
+                    <img src="assets/img/project-renovation.png" alt="Loft Industrial Soho"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <span
+                            class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver
+                            Proyecto</span>
                     </div>
                 </div>
                 <div class="mt-8 flex justify-between items-start">
@@ -229,39 +331,60 @@
     <!-- Why Us / Benefits -->
     <section id="beneficios" class="py-32 px-6 md:px-12 bg-white text-dark overflow-hidden relative">
         <!-- Abstract Background Shape -->
-        <div class="absolute -right-20 top-1/2 -translate-y-1/2 text-[20vw] font-display font-extrabold text-accent/5 select-none rotate-90 leading-none">DAFCER</div>
+        <div
+            class="absolute -right-20 top-1/2 -translate-y-1/2 text-[20vw] font-display font-extrabold text-accent/5 select-none rotate-90 leading-none">
+            DAFCER</div>
 
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                 <div>
-                    <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter mb-12">¿POR QUÉ <br> ELEGIRNOS?</h2>
-                    
+                    <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter mb-12">¿POR QUÉ <br>
+                        ELEGIRNOS?</h2>
+
                     <div class="space-y-10">
                         <div class="benefit-item flex gap-8">
                             <div class="flex-shrink-0 w-16 h-16 bg-primary/10 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-2xl font-display font-bold mb-2 text-dark">Calidad Certificada</h4>
-                                <p class="text-accent">Utilizamos materiales de primera línea y procesos supervisados bajo normas internacionales de construcción.</p>
+                                <p class="text-accent font-medium">Utilizamos materiales de primera línea y procesos
+                                    supervisados bajo normas internacionales de construcción.</p>
                             </div>
                         </div>
                         <div class="benefit-item flex gap-8">
                             <div class="flex-shrink-0 w-16 h-16 bg-primary/10 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-2xl font-display font-bold mb-2 text-dark">Cumplimiento Riguroso</h4>
-                                <p class="text-accent">Respetamos los plazos de entrega pactados. Tu tiempo y presupuesto son nuestra prioridad absoluta.</p>
+                                <p class="text-accent font-medium">Respetamos los plazos de entrega pactados. Tu tiempo
+                                    y presupuesto son nuestra prioridad absoluta.</p>
                             </div>
                         </div>
                         <div class="benefit-item flex gap-8">
                             <div class="flex-shrink-0 w-16 h-16 bg-primary/10 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-2xl font-display font-bold mb-2 text-dark">Diseño Vanguardista</h4>
-                                <p class="text-accent">Fusionamos la solidez estructural con las tendencias arquitectónicas más actuales para crear espacios únicos.</p>
+                                <p class="text-accent font-medium">Fusionamos la solidez estructural con las tendencias
+                                    arquitectónicas más actuales para crear espacios únicos.</p>
                             </div>
                         </div>
                     </div>
@@ -269,7 +392,8 @@
 
                 <div class="relative">
                     <div class="aspect-[4/5] bg-dark overflow-hidden rounded-sm reveal-img">
-                        <img src="assets/img/hero-bg.jpg" alt="Equipo DAFCER" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <img src="assets/img/hero-bg.jpg" alt="Equipo DAFCER"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                     </div>
                     <!-- Floating Badge -->
                     <div class="absolute -bottom-10 -left-10 bg-primary p-10 text-dark">
@@ -284,9 +408,14 @@
     <!-- Testimonials -->
     <section class="py-24 px-6 md:px-12 bg-dark text-white border-y border-accent/10">
         <div class="max-w-4xl mx-auto text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F3811F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-10"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 2.5 1 4.066 2 5V21zm14 0c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 2.5 1 4.066 2 5V21z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                stroke="#F3811F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-10">
+                <path
+                    d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 2.5 1 4.066 2 5V21zm14 0c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 2.5 1 4.066 2 5V21z" />
+            </svg>
             <p class="text-3xl md:text-5xl font-display font-bold italic leading-tight mb-10">
-                "DAFCER transformó nuestra idea en una realidad que superó todas nuestras expectativas. La atención al detalle y el profesionalismo son inigualables."
+                "DAFCER transformó nuestra idea en una realidad que superó todas nuestras expectativas. La atención al
+                detalle y el profesionalismo son inigualables."
             </p>
             <div class="flex items-center justify-center gap-4">
                 <div class="w-12 h-12 bg-primary rounded-full overflow-hidden">
@@ -304,25 +433,48 @@
     <section id="contacto" class="py-32 px-6 md:px-12 bg-white text-dark">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
             <div>
-                <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter mb-8">HABLEMOS <br> DE TU <span class="text-primary italic">FUTURO</span></h2>
-                <p class="text-lg text-accent mb-12 max-w-md">¿Tienes un proyecto en mente? Nuestro equipo de expertos está listo para asesorarte y llevar tu visión al siguiente nivel.</p>
-                
+                <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter mb-8">HABLEMOS <br> DE TU
+                    <span class="text-primary italic">FUTURO</span>
+                </h2>
+                <p class="text-lg text-accent mb-12 max-w-md">¿Tienes un proyecto en mente? Nuestro equipo de expertos
+                    está listo para asesorarte y llevar tu visión al siguiente nivel.</p>
+
                 <div class="space-y-6">
                     <div class="flex items-center gap-6 group">
-                        <div class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <div
+                            class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
                         </div>
                         <span class="text-xl font-bold">+54 11 1234-5678</span>
                     </div>
                     <div class="flex items-center gap-6 group">
-                        <div class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <div
+                            class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
                         </div>
                         <span class="text-xl font-bold">info@dafcer.com</span>
                     </div>
                     <div class="flex items-center gap-6 group">
-                        <div class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <div
+                            class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
                         </div>
                         <span class="text-xl font-bold">Av. Libertador 1500, Buenos Aires</span>
                     </div>
@@ -333,17 +485,23 @@
                 <form id="contact-form" action="https://formspree.io/f/xrejdpbq" method="POST" class="space-y-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-2">
-                            <label for="name" class="text-xs font-bold uppercase tracking-widest text-accent">Nombre Completo</label>
-                            <input type="text" id="name" name="name" required class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors">
+                            <label for="name" class="text-xs font-bold uppercase tracking-widest text-accent">Nombre
+                                Completo</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors">
                         </div>
                         <div class="space-y-2">
-                            <label for="email" class="text-xs font-bold uppercase tracking-widest text-accent">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors">
+                            <label for="email"
+                                class="text-xs font-bold uppercase tracking-widest text-accent">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors">
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label for="project" class="text-xs font-bold uppercase tracking-widest text-accent">Tipo de Proyecto</label>
-                        <select id="project" name="project_type" class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors appearance-none">
+                        <label for="project" class="text-xs font-bold uppercase tracking-widest text-accent">Tipo de
+                            Proyecto</label>
+                        <select id="project" name="project_type"
+                            class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors appearance-none">
                             <option value="residencial">Residencial de Lujo</option>
                             <option value="comercial">Comercial / Oficinas</option>
                             <option value="remodelacion">Remodelación Premium</option>
@@ -351,10 +509,13 @@
                         </select>
                     </div>
                     <div class="space-y-2">
-                        <label for="message" class="text-xs font-bold uppercase tracking-widest text-accent">Cuéntanos más</label>
-                        <textarea id="message" name="message" rows="4" class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors resize-none"></textarea>
+                        <label for="message" class="text-xs font-bold uppercase tracking-widest text-accent">Cuéntanos
+                            más</label>
+                        <textarea id="message" name="message" rows="4"
+                            class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors resize-none"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-dark text-white py-6 font-bold tracking-[0.2em] hover:bg-primary hover:text-dark transition-all duration-500 uppercase">
+                    <button type="submit"
+                        class="w-full bg-dark text-white py-6 font-bold tracking-[0.2em] hover:bg-primary hover:text-dark transition-all duration-500 uppercase text-xs">
                         Enviar Solicitud
                     </button>
                 </form>
@@ -370,9 +531,10 @@
                     <a href="#" class="inline-block mb-8">
                         <img src="assets/img/logo.svg" alt="DAFCER" class="h-16 w-auto">
                     </a>
-                    <p class="text-accent">Dedicados a elevar los estándares de la construcción moderna a través de la innovación y la excelencia técnica.</p>
+                    <p class="text-accent">Dedicados a elevar los estándares de la construcción moderna a través de la
+                        innovación y la excellence técnica.</p>
                 </div>
-                
+
                 <div class="flex flex-col md:grid md:grid-cols-3 gap-12 md:gap-24 w-full">
                     <div>
                         <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Empresa</h5>
@@ -393,9 +555,12 @@
                     <div>
                         <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Social</h5>
                         <ul class="space-y-4 text-accent text-sm">
-                            <li><a href="https://www.instagram.com/dafcer.servicios/" target="_blank" class="hover:text-primary transition-colors">Instagram</a></li>
-                            <li><a href="https://wa.me/5491112345678" target="_blank" class="hover:text-primary transition-colors">WhatsApp</a></li>
-                            <li><a href="https://www.facebook.com/share/1Ey2xsErUL/" target="_blank" class="hover:text-primary transition-colors">Facebook</a></li>
+                            <li><a href="https://www.instagram.com/dafcer.servicios/" target="_blank"
+                                    class="hover:text-primary transition-colors">Instagram</a></li>
+                            <li><a href="https://wa.me/5491112345678" target="_blank"
+                                    class="hover:text-primary transition-colors">WhatsApp</a></li>
+                            <li><a href="https://www.facebook.com/share/1Ey2xsErUL/" target="_blank"
+                                    class="hover:text-primary transition-colors">Facebook</a></li>
                         </ul>
                     </div>
                 </div>
@@ -414,4 +579,5 @@
     <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
+
 </html>

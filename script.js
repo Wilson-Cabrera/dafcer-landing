@@ -5,39 +5,81 @@ document.addEventListener('DOMContentLoaded', () => {
     // Register GSAP Plugins
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Preloader Animation
-    const preloader = () => {
+    // 1. Configuración de la Secuencia de Canvas y Precarga Inteligente
+    const canvas = document.getElementById("hero-canvas");
+    const context = canvas.getContext("2d");
+
+    const frameCount = 96; // Del 00 al 95 son 96 fotogramas
+    const currentFrame = index => (
+        `assets/img/sequence/frame_${index.toString().padStart(2, '0')}.jpg`
+    );
+
+    const images = [];
+    const seq = { frame: 0 };
+    let loadedImagesCount = 0;
+
+    const loaderText = document.getElementById("loader-text");
+    const loaderBar = document.getElementById("loader-bar");
+
+    // Estado inicial de las revelaciones
+    gsap.set(".reveal", { opacity: 0, y: 50 });
+    gsap.set("#loader-text", { opacity: 1 }); // Logo de DAFCER visible durante la carga
+
+    const startApp = () => {
         const tl = gsap.timeline();
-
-        // Initial state for reveals
-        gsap.set(".reveal", { opacity: 0, y: 50 });
-
-        tl.to("#loader-text", {
-            opacity: 1,
+        tl.to("#preloader", {
+            y: "-100%",
             duration: 1,
-            ease: "power2.out"
+            ease: "expo.inOut"
         })
-            .to("#loader-bar", {
-                width: "100%",
-                duration: 1.5,
-                ease: "expo.inOut"
-            }, "-=0.5")
-            .to("#preloader", {
-                y: "-100%",
-                duration: 1,
-                ease: "expo.inOut"
-            })
-            .to(".reveal", {
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                stagger: 0.2,
-                ease: "power4.out",
-                startAt: { y: 50, opacity: 0 }
-            }, "-=0.5");
+        .to(".reveal", {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power4.out",
+            startAt: { y: 50, opacity: 0 }
+        }, "-=0.5");
     };
 
-    preloader();
+    const updateLoadingProgress = () => {
+        loadedImagesCount++;
+        const percentage = Math.round((loadedImagesCount / frameCount) * 100);
+        
+        // Animamos el ancho de la barra
+        gsap.to(loaderBar, {
+            width: `${percentage}%`,
+            duration: 0.2,
+            ease: "power1.out"
+        });
+
+        // Actualizamos el porcentaje al lado de DAFCER
+        if (loaderText) {
+            loaderText.innerHTML = `DAFCER <span style="font-size: 0.45em; opacity: 0.4; margin-left: 15px; font-weight: 300;">${percentage}%</span>`;
+        }
+
+        if (loadedImagesCount === frameCount) {
+            setTimeout(startApp, 400); // Breve espera para deleite visual
+        }
+    };
+
+    // Comenzamos la precarga de todas las imágenes
+    for (let i = 0; i < frameCount; i++) {
+        const img = new Image();
+        img.onload = () => {
+            updateLoadingProgress();
+            // Dibujamos el primer fotograma inmediatamente en cuanto cargue
+            if (i === 0) {
+                renderCanvas();
+            }
+        };
+        img.onerror = () => {
+            // Si alguna imagen falla, incrementamos igual para que no se trabe el loader
+            updateLoadingProgress();
+        };
+        img.src = currentFrame(i);
+        images.push(img);
+    }
 
     // 2. Navigation Scroll Effect
     const nav = document.getElementById('main-nav');
@@ -84,16 +126,54 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => toggleMenu(false));
     });
 
-    // 4. Hero Parallax
-    gsap.to("#hero-img", {
+    // 4. Hero Canvas Scroll Sequence
+    // Función para renderizar el fotograma actual manteniendo object-cover (Hoisted)
+    function renderCanvas() {
+        if(!images[seq.frame] || !images[seq.frame].complete) return;
+        
+        const img = images[seq.frame];
+        
+        if(canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        const canvasRatio = canvas.width / canvas.height;
+        const imgRatio = img.width / img.height;
+        
+        let drawWidth, drawHeight, offsetX, offsetY;
+        
+        if (canvasRatio > imgRatio) {
+            drawWidth = canvas.width;
+            drawHeight = canvas.width / imgRatio;
+            offsetX = 0;
+            offsetY = (canvas.height - drawHeight) / 2;
+        } else {
+            drawWidth = canvas.height * imgRatio;
+            drawHeight = canvas.height;
+            offsetX = (canvas.width - drawWidth) / 2;
+            offsetY = 0;
+        }
+        
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    }
+
+    window.addEventListener('resize', renderCanvas);
+
+    // Animación vinculada al scroll
+    gsap.to(seq, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
         scrollTrigger: {
-            trigger: "section",
+            trigger: "#hero-section",
             start: "top top",
-            end: "bottom top",
-            scrub: true
+            end: "+=300%", // La sección estará anclada durante 3 veces el alto de la pantalla
+            scrub: 0.5,
+            pin: true
         },
-        y: 200,
-        ease: "none"
+        onUpdate: renderCanvas
     });
 
     // 5. Scroll Animations for Sections
