@@ -119,6 +119,118 @@ input:-webkit-autofill:active {
     transform: translateX(0);
 }
 
+/* Modal Open State */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Project Image Hotspots */
+.hotspot {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.hotspot-trigger {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(243, 129, 31, 0.3);
+    border: 2px solid var(--primary);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hotspot-trigger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    animation: hotspotPulse 2s infinite ease-out;
+}
+
+.hotspot-trigger-inner {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+@keyframes hotspotPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.hotspot:hover .hotspot-trigger,
+.hotspot.active .hotspot-trigger {
+    background: var(--primary);
+    transform: scale(1.1);
+}
+
+.hotspot:hover .hotspot-trigger-inner,
+.hotspot.active .hotspot-trigger-inner {
+    transform: scale(1.2);
+    background: var(--dark);
+}
+
+.hotspot-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 2px;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    z-index: 20;
+}
+
+.hotspot-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.95);
+}
+
+.hotspot:hover .hotspot-tooltip,
+.hotspot.active .hotspot-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
 /* Responsiveness Tweaks */
 @media (max-width: 768px) {
     .section-title {

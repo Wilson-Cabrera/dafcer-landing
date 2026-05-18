@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const seq = { frame: 0 };
     let loadedImagesCount = 0;
 
-    const loaderText = document.getElementById("loader-text");
+    const loaderPercentage = document.getElementById("loader-percentage");
     const loaderBar = document.getElementById("loader-bar");
 
     // Estado inicial de las revelaciones
     gsap.set(".reveal", { opacity: 0, y: 50 });
-    gsap.set("#loader-text", { opacity: 1 }); // Logo de DAFCER visible durante la carga
+    gsap.set("#loader-content", { opacity: 1 }); // Logo visible durante la carga
 
     const startApp = () => {
         const tl = gsap.timeline();
@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "power1.out"
         });
 
-        // Actualizamos el porcentaje al lado de DAFCER
-        if (loaderText) {
-            loaderText.innerHTML = `DAFCER <span style="font-size: 0.45em; opacity: 0.4; margin-left: 15px; font-weight: 300;">${percentage}%</span>`;
+        // Actualizamos el porcentaje numérico
+        if (loaderPercentage) {
+            loaderPercentage.innerText = `${percentage}%`;
         }
 
         if (loadedImagesCount === frameCount) {
@@ -299,5 +299,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 8. Project Modal Logic
+
+    const modal = document.getElementById('project-modal');
+    if (modal) {
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalContent = document.getElementById('modal-content');
+        const modalCloseBtn = document.getElementById('modal-close');
+        const hotspotsWrapper = document.getElementById('hotspots-wrapper');
+
+        const mTitle = document.getElementById('modal-title');
+        const mCategory = document.getElementById('modal-category');
+        const mLocation = document.getElementById('modal-location');
+        const mSurface = document.getElementById('modal-surface');
+        const mYear = document.getElementById('modal-year');
+        const mImage = document.getElementById('modal-image');
+        const mDesc = document.getElementById('modal-description');
+
+        const openModal = (projectId) => {
+            const data = projectsData[projectId];
+            if (!data) return;
+
+            // Populate data
+            mTitle.innerText = data.title;
+            mCategory.innerText = data.category;
+            mLocation.innerText = data.location;
+            mSurface.innerText = data.surface;
+            mYear.innerText = data.year;
+            mImage.src = data.image;
+            mDesc.innerText = data.description;
+
+            // Render hotspots
+            if (hotspotsWrapper) {
+                hotspotsWrapper.innerHTML = '';
+                if (data.hotspots && data.hotspots.length > 0) {
+                    data.hotspots.forEach(spot => {
+                        const spotEl = document.createElement('div');
+                        spotEl.className = 'hotspot';
+                        spotEl.style.left = `${spot.x}%`;
+                        spotEl.style.top = `${spot.y}%`;
+
+                        spotEl.innerHTML = `
+                            <div class="hotspot-trigger">
+                                <div class="hotspot-trigger-inner"></div>
+                            </div>
+                            <div class="hotspot-tooltip">${spot.text}</div>
+                        `;
+
+                        // Mobile touch support
+                        spotEl.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const isActive = spotEl.classList.contains('active');
+                            document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+                            if (!isActive) {
+                                spotEl.classList.add('active');
+                            }
+                        });
+
+                        hotspotsWrapper.appendChild(spotEl);
+                    });
+                }
+            }
+
+            // Show modal container
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.style.pointerEvents = 'auto';
+            document.body.classList.add('modal-open');
+
+            // GSAP Animation In
+            const tl = gsap.timeline();
+            tl.to(modalBackdrop, { opacity: 1, duration: 0.4, ease: 'power2.out' })
+              .to(modalCloseBtn, { opacity: 1, pointerEvents: 'auto', duration: 0.3 }, "-=0.2")
+              .to(modalContent, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, "-=0.3")
+              .fromTo('.hotspot', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, "-=0.2");
+        };
+
+        const closeModal = () => {
+            // GSAP Animation Out
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    modal.style.pointerEvents = 'none';
+                    document.body.classList.remove('modal-open');
+                    if (hotspotsWrapper) hotspotsWrapper.innerHTML = ''; // Clear DOM
+                    gsap.set(modalContent, { y: 20 }); // reset position for next time
+                }
+            });
+            
+            tl.to('.hotspot', { opacity: 0, scale: 0, duration: 0.2, stagger: 0.05, ease: 'power2.in' })
+              .to(modalContent, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' }, "-=0.1")
+              .to(modalCloseBtn, { opacity: 0, pointerEvents: 'none', duration: 0.2 }, "-=0.1")
+              .to(modalBackdrop, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, "-=0.1");
+        };
+
+        // Attach events to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.getAttribute('data-project-id');
+                if (projectId) openModal(projectId);
+            });
+        });
+
+        // Close events
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+
+        // Close tooltips on content/backdrop click
+        modal.addEventListener('click', () => {
+            document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+        });
+    }
 
 });
