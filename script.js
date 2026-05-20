@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tl.to("#preloader", {
             y: "-100%",
             duration: 1,
-            ease: "expo.inOut"
+            ease: "expo.inOut",
+            onComplete: () => {
+                ScrollTrigger.refresh();
+            }
         })
         .to(".reveal", {
             y: 0,
@@ -207,30 +210,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Image Reveal with Scale
+    // Image Reveal with Scale (Robust fromTo animation to override opacity 0)
     gsap.utils.toArray('.reveal-img').forEach(container => {
         const img = container.querySelector('img');
 
-        gsap.from(container, {
-            scrollTrigger: {
-                trigger: container,
-                start: "top 80%",
+        gsap.fromTo(container, 
+            {
+                opacity: 0,
+                scale: 0.9
             },
-            scale: 0.9,
-            opacity: 0,
-            duration: 1.5,
-            ease: "power4.out"
-        });
+            {
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 80%",
+                },
+                opacity: 1,
+                scale: 1,
+                duration: 1.5,
+                ease: "power4.out"
+            }
+        );
 
-        gsap.from(img, {
-            scrollTrigger: {
-                trigger: container,
-                start: "top 80%",
+        gsap.fromTo(img, 
+            {
+                scale: 1.2
             },
-            scale: 1.2,
-            duration: 2,
-            ease: "power2.out"
-        });
+            {
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 80%",
+                },
+                scale: 1,
+                duration: 2,
+                ease: "power2.out"
+            }
+        );
     });
 
     // Benefit Items
@@ -245,6 +259,176 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.3,
         ease: "power2.out"
     });
+
+    // How We Work Section Animations (Cómo Trabajamos)
+    gsap.from(".reveal-work-item", {
+        scrollTrigger: {
+            trigger: "#como-trabajamos",
+            start: "top 75%",
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out"
+    });
+
+    // Animate Stats Badges dynamically on scroll for WOW effect!
+    gsap.from("#stat-badge-1", {
+        scrollTrigger: {
+            trigger: "#como-trabajamos",
+            start: "top 65%",
+        },
+        x: -60,
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out"
+    });
+
+    gsap.from("#stat-badge-2", {
+        scrollTrigger: {
+            trigger: "#como-trabajamos",
+            start: "top 65%",
+        },
+        x: 60,
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.5,
+        delay: 0.2,
+        ease: "power4.out"
+    });
+
+    // ==========================================
+    // 5b. Cinematic Video Showcase Section Logic
+    // ==========================================
+
+    const videoSection = document.getElementById('vision-vanguardia');
+    const video = document.getElementById('vanguardia-video');
+    const videoWrapper = document.getElementById('video-wrapper');
+    const playBtn = document.getElementById('magnetic-play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const progressBar = document.getElementById('video-progress-bar');
+    const videoRevealContainer = document.getElementById('video-reveal-container');
+
+    if (videoSection && video) {
+        
+        // 1. ScrollTrigger Reveal for the whole section elements (animating to visible state)
+        gsap.to(".reveal-video-text", {
+            scrollTrigger: {
+                trigger: videoSection,
+                start: "top 75%",
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
+        // Theater Reveal: expanding and fading in the video container on scroll
+        gsap.to(videoRevealContainer, {
+            scrollTrigger: {
+                trigger: videoSection,
+                start: "top 65%",
+            },
+            opacity: 1,
+            scale: 1,
+            duration: 1.6,
+            ease: "power4.out"
+        });
+
+        // 2. Lazy Loading the Video on Scroll (Saves huge bandwidth)
+        ScrollTrigger.create({
+            trigger: videoSection,
+            start: "top 90%",
+            onEnter: () => {
+                const sources = video.querySelectorAll('source');
+                let needsLoad = false;
+                
+                sources.forEach(source => {
+                    if (source.getAttribute('data-src') && !source.getAttribute('src')) {
+                        source.setAttribute('src', source.getAttribute('data-src'));
+                        needsLoad = true;
+                    }
+                });
+
+                if (needsLoad) {
+                    video.load();
+                    // Optional: Autoplay automatically if muted is supported (most browsers)
+                    video.play().catch(err => {
+                        console.log("Autoplay prevented, waiting for user click.");
+                    });
+                }
+            }
+        });
+
+        // 3. Play/Pause toggle on clicking the wrapper
+        const togglePlay = () => {
+            if (video.paused) {
+                video.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            } else {
+                video.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            }
+        };
+
+        videoWrapper.addEventListener('click', togglePlay);
+
+        // Update custom bottom minimal progress bar
+        video.addEventListener('timeupdate', () => {
+            const percentage = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = `${percentage}%`;
+        });
+
+        // When video ends, reset progress bar and play icon
+        video.addEventListener('ended', () => {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            progressBar.style.width = '0%';
+        });
+
+        // 4. Interactive Magnetic Button Hover Effect
+        videoWrapper.addEventListener('mousemove', (e) => {
+            const rect = videoWrapper.getBoundingClientRect();
+            
+            // Mouse position relative to the video wrapper
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Animate play button to follow mouse position with inertia
+            gsap.to(playBtn, {
+                x: mouseX - rect.width / 2,
+                y: mouseY - rect.height / 2,
+                duration: 0.6,
+                ease: "power3.out"
+            });
+        });
+
+        // Hover States: scale Play button up/down smoothly on enter/leave
+        videoWrapper.addEventListener('mouseenter', () => {
+            gsap.to(playBtn, {
+                scale: 1,
+                duration: 0.4,
+                ease: "back.out(1.5)"
+            });
+        });
+
+        videoWrapper.addEventListener('mouseleave', () => {
+            // Smoothly snap play button back to center when mouse leaves
+            gsap.to(playBtn, {
+                x: 0,
+                y: 0,
+                scale: 0,
+                duration: 0.5,
+                ease: "power3.out"
+            });
+        });
+    }
 
     // 6. Form Submission (Real via Formspree)
     const contactForm = document.getElementById('contact-form');

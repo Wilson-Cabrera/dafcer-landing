@@ -1,0 +1,17 @@
+# Instrucciones para Cargar el Video en DAFCER
+
+Para que la sección "Visión de Vanguardia" (`#vision-vanguardia`) funcione de manera óptima y fluida, debes colocar tus archivos de video en esta carpeta siguiendo estas pautas:
+
+## 1. Nombres de Archivo
+Debes guardar tu video con los siguientes nombres exactos:
+- `render-3d.webm` (video en formato WebM - Prioritario para navegadores modernos)
+- `render-3d.mp4` (video en formato MP4 - Respaldo para Apple Safari / iOS)
+
+## 2. Recomendaciones de Compresión y Calidad (Performance Premium)
+Para asegurar que el sitio web cargue instantáneamente y no consuma datos innecesarios a tus clientes, te recomendamos comprimir el video original usando herramientas gratuitas como **Handbrake** o **ffmpeg**:
+
+- **Resolución:** Full HD (1920x1080) o HD (1280x720) es más que suficiente para web. Evita videos en 4K nativos.
+- **Relación de Aspecto:** Horizontal (16:9).
+- **Bitrate:** Entre 1.5 Mbps y 3.0 Mbps.
+- **Tamaño de Archivo:** Intenta que cada archivo pese **menos de 5 MB a 10 MB**.
+- **Audio:** Asegúrate de codificar el video sin audio (o con pista de audio silenciada) para garantizar la compatibilidad perfecta con el sistema de reproducción automática (`autoplay`) del navegador.
