@@ -4,31 +4,31 @@
 
 const projectsData = {
     'aurora': {
-        title: 'Residencia Aurora',
+        title: 'Vivienda uni familiar',
         category: 'Residencial',
-        location: 'Nordelta, BA',
+        location: 'Plottier, Neuquén',
         surface: '450 m²',
         year: '2024',
-        image: 'assets/img/project-residential.png',
+        image: 'assets/img/Proyecto_LG1.png',
         description: 'Diseño y construcción de hogar de lujo combinando estética minimalista y tecnología de vanguardia. La obra destaca por sus amplios ventanales y eficiencia energética.',
         hotspots: [
-            { x: 20, y: 55, text: 'Luminarias LED integradas y automatización Lutron' },
-            { x: 38, y: 70, text: 'Microcemento alisado con acabado mate premium' },
-            { x: 45, y: 40, text: 'Carpintería de aluminio anodizado con DVH' }
+            { x: 25, y: 55, text: 'Carpintería premium en cada ambiente' },
+            { x: 50, y: 70, text: 'Porcelanato pulido de alta resistencia' },
+            { x: 50, y: 14, text: 'Iluminación inteligente y confort' }
         ]
     },
     'delta': {
-        title: 'Torre Corporativa Delta',
-        category: 'Comercial',
-        location: 'Puerto Madero, BA',
-        surface: '12,000 m²',
-        year: '2023',
-        image: 'assets/img/project-commercial.png',
-        description: 'Infraestructura comercial avanzada con certificación LEED. Una obra de ingeniería de alto nivel diseñada para optimizar el rendimiento corporativo y la sustentabilidad.',
+        title: 'Padel House Club',
+        category: 'Deportivo',
+        location: 'Plottier, Neuquén',
+        surface: '1,200 m²',
+        year: '2025',
+        image: 'assets/img/Proyecto_PH.png',
+        description: 'Infraestructura deportiva avanzada con canchas full panorámicas; una obra constructiva de alto nivel diseñada para optimizar el rendimiento competitivo y la sustentabilidad.',
         hotspots: [
-            { x: 30, y: 35, text: 'Fachada con doble vidrio templado y control de radiación' },
-            { x: 50, y: 65, text: 'Fundación sismo-resistente de hormigón armado' },
-            { x: 75, y: 45, text: 'Climatización inteligente VRV de bajo consumo' }
+            { x: 40, y: 15, text: 'Cubierta termoacústica con climatización inteligente.' },
+            { x: 40, y: 77, text: 'Césped premium con amortiguación y confort.' },
+            { x: 70, y: 45, text: 'Módulos panorámicos de vidrio templado.' }
         ]
     },
     'soho': {
