@@ -37,7 +37,7 @@ const projectsData = {
         location: 'Palermo Soho, BA',
         surface: '180 m²',
         year: '2024',
-        image: 'assets/img/project-renovation.png',
+        image: 'assets/img/Proyecto-Spusa.png',
         description: 'Transformación integral de un antiguo galpón en una residencia premium. Destaca el diseño industrial con acabados de alta gama y redistribución inteligente de espacios.',
         hotspots: [
             { x: 25, y: 30, text: 'Restauración de bovedillas originales y vigas de hierro' },
