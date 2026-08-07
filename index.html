@@ -8,6 +8,20 @@
     <meta name="description"
         content="DAFCER Construcciones y servicios. Muy pronto, una nueva experiencia digital. Registrate para ser el primero en saberlo.">
 
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  AUTO-LAUNCH: redirect to landing on date  ║
+         ║  Fecha objetivo: 07 Nov 2026 00:00 AR      ║
+         ╚══════════════════════════════════════════════╝ -->
+    <script>
+        (function () {
+            var launchDate = new Date('2026-11-07T00:00:00');
+            if (new Date() >= launchDate) {
+                // Launch date reached — go straight to the real landing page
+                window.location.replace('landing.html');
+            }
+        })();
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
 

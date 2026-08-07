@@ -1,0 +1,63 @@
+name: 🚀 Lanzamiento Oficial DAFCER
+
+# ─────────────────────────────────────────────────────────────
+# Corre automáticamente el 7 de noviembre a las 03:05 UTC
+# = medianoche (00:05) hora Argentina (UTC-3)
+# También se puede disparar manualmente desde GitHub Actions
+# ─────────────────────────────────────────────────────────────
+on:
+  schedule:
+    - cron: '5 3 7 11 *'   # min hora día mes año(*)
+  workflow_dispatch:         # trigger manual desde GitHub UI
+
+jobs:
+  activate-landing:
+    name: Activar Landing Page
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar el repositorio con permisos de escritura
+      - name: 📥 Checkout del repositorio
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. Verificar que la fecha de lanzamiento haya llegado
+      - name: 📅 Verificar fecha de lanzamiento
+        id: check_date
+        run: |
+          LAUNCH_DATE="2026-11-07"
+          CURRENT_DATE=$(date -u +%Y-%m-%d)
+          echo "Fecha actual (UTC): $CURRENT_DATE"
+          echo "Fecha de lanzamiento: $LAUNCH_DATE"
+          if [[ "$CURRENT_DATE" >= "$LAUNCH_DATE" ]]; then
+            echo "✅ Fecha de lanzamiento alcanzada. Activando landing page..."
+            echo "should_launch=true" >> $GITHUB_OUTPUT
+          else
+            echo "⏳ Todavía no es la fecha de lanzamiento. Abortando."
+            echo "should_launch=false" >> $GITHUB_OUTPUT
+          fi
+
+      # 3. Reemplazar index.html con la landing page oficial
+      - name: 🔄 Activar landing page como página principal
+        if: steps.check_date.outputs.should_launch == 'true'
+        run: |
+          cp landing.html index.html
+          echo "✅ landing.html copiado a index.html exitosamente."
+
+      # 4. Hacer commit y push — Vercel detectará el cambio y desplegará automáticamente
+      - name: 📤 Commit y push del lanzamiento
+        if: steps.check_date.outputs.should_launch == 'true'
+        run: |
+          git config user.name  "DAFCER Auto-Launch Bot"
+          git config user.email "bot@dafcer.com"
+          git add index.html
+
+          # Solo hace commit si hay cambios reales
+          if git diff --staged --quiet; then
+            echo "ℹ️ No hay cambios que commitear (la landing ya estaba activa)."
+          else
+            git commit -m "🚀 Lanzamiento oficial — Landing page activada automáticamente [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git push origin main
+            echo "✅ Push realizado. Vercel desplegará la landing page en segundos."
+          fi
