@@ -8,6 +8,24 @@
     <meta name="description"
         content="Casa Futura by DAFCER: viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
 
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  PRE-LAUNCH PROTECTION & TEAM PREVIEW ACCESS                     ║
+         ║  Fecha objetivo: 03 Sep 2026 12:00 AR                            ║
+         ║  Acceso equipo: casa-futura.html?preview=dafcer                  ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <script>
+        (function () {
+            var launchDate = new Date('2026-09-03T12:00:00');
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('preview') === 'dafcer') {
+                sessionStorage.setItem('dafcer_preview', 'true');
+            }
+            if (new Date() < launchDate && !sessionStorage.getItem('dafcer_preview')) {
+                window.location.replace('index.html');
+            }
+        })();
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
 
