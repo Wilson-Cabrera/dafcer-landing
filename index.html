@@ -8,14 +8,11 @@
     <meta name="description"
         content="DAFCER Construcciones y servicios. Muy pronto, una nueva experiencia digital. Registrate para ser el primero en saberlo.">
 
-    <!-- Test mode: 15s countdown for testing auto-redirect -->
+    <!-- Test mode: 30s countdown for testing auto-redirect -->
     <script>
-        // Guardamos la fecha de fin de prueba para la sesión actual (15 segundos)
-        let testTarget = sessionStorage.getItem('launch_test_time');
-        if (!testTarget) {
-            testTarget = Date.now() + 15000;
-            sessionStorage.setItem('launch_test_time', testTarget);
-        }
+        // Nueva cuenta de 30 segundos para la prueba
+        let testTarget = Date.now() + 30000;
+        sessionStorage.setItem('launch_test_time', testTarget);
     </script>
 
     <!-- Favicon -->
@@ -452,8 +449,8 @@
             }, 6000);
 
 
-            // ── Countdown Timer (Test Mode: 15s) ──────────────────────────
-            const targetTimestamp = parseInt(sessionStorage.getItem('launch_test_time')) || (Date.now() + 15000);
+            // ── Countdown Timer (Test Mode: 30s) ──────────────────────────
+            const targetTimestamp = parseInt(sessionStorage.getItem('launch_test_time')) || (Date.now() + 30000);
             const launchDate = new Date(targetTimestamp);
 
             const elDays = document.getElementById('cd-days');
