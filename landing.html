@@ -40,7 +40,7 @@
     </script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
 
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -80,6 +80,14 @@
                 class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Proyectos</a>
             <a href="#beneficios"
                 class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Nosotros</a>
+            <a href="casa-futura.html"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest flex items-center gap-2">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                Casa Futura
+            </a>
             <a href="#contacto"
                 class="bg-primary text-dark px-8 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm text-xs tracking-widest">CONTACTO</a>
         </div>
@@ -110,7 +118,15 @@
             class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Proyectos</a>
         <a href="#beneficios"
             class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Nosotros</a>
-        <a href="#contacto" class="text-3xl md:text-4xl font-display font-extrabold text-primary uppercase">Contacto</a>
+        <a href="casa-futura.html"
+            class="text-3xl md:text-4xl font-display font-extrabold text-primary transition-colors uppercase flex items-center gap-4">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+            </span>
+            Casa Futura
+        </a>
+        <a href="#contacto" class="text-3xl md:text-4xl font-display font-extrabold text-white/50 uppercase">Contacto</a>
     </div>
 
     <!-- Hero Section: Pure Cinematic Visual -->
@@ -280,7 +296,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Residencial"
                 data-project-id="aurora">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto_LG1.png" alt="Residencia Aurora"
+                    <img src="assets/img/Proyecto_LG0.png" alt="Residencia Aurora"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -291,8 +307,8 @@
                 </div>
                 <div class="mt-8 flex justify-between items-start">
                     <div>
-                        <h4 class="text-3xl font-display font-bold mb-2">Residencia</h4>
-                        <span class="text-accent uppercase tracking-widest text-sm">smart home • 2026</span>
+                        <h4 class="text-3xl font-display font-bold mb-2">Las Gemas</h4>
+                        <span class="text-accent uppercase tracking-widest text-sm">home • 2025</span>
                     </div>
                 </div>
             </div>
@@ -322,7 +338,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Renovación"
                 data-project-id="soho">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto-Spusa.png" alt="Loft Industrial Soho"
+                    <img src="assets/img/Proyecto-Spusa0.png" alt="Loft Industrial Soho"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -333,8 +349,29 @@
                 </div>
                 <div class="mt-8 flex justify-between items-start">
                     <div>
-                        <h4 class="text-3xl font-display font-bold mb-2">Loft Industrial Soho</h4>
-                        <span class="text-accent uppercase tracking-widest text-sm">Renovation Art • 2024</span>
+                        <h4 class="text-3xl font-display font-bold mb-2">Spusa</h4>
+                        <span class="text-accent uppercase tracking-widest text-sm">Renovation Art • 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card group cursor-pointer overflow-hidden" data-category="Residencial"
+                data-project-id="castanos">
+                <div class="relative overflow-hidden aspect-[16/10]">
+                    <img src="assets/img/Proyecto_LC0.png" alt="Los Castaños"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <span
+                            class="border border-white px-8 py-3 text-white font-bold tracking-widest uppercase backdrop-blur-sm">Ver
+                            Proyecto</span>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-between items-start">
+                    <div>
+                        <h4 class="text-3xl font-display font-bold mb-2">Los Castaños</h4>
+                        <span class="text-accent uppercase tracking-widest text-sm">Residencial • 2025</span>
                     </div>
                 </div>
             </div>
@@ -594,16 +631,15 @@
                     d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 2.5 1 4.066 2 5V21zm14 0c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 2.5 1 4.066 2 5V21z" />
             </svg>
             <p class="text-3xl md:text-5xl font-display font-bold italic leading-tight mb-10">
-                "DAFCER transformó nuestra idea en una realidad que superó todas nuestras expectativas. La atención al
-                detalle y el profesionalismo son inigualables."
+                "En nuestra cabeza había una imaginación de lo que queríamos; DafCer la aceptó y la mejoró."
             </p>
             <div class="flex items-center justify-center gap-4">
                 <div class="w-12 h-12 bg-primary rounded-full overflow-hidden">
-                    <img src="https://i.pravatar.cc/100?u=12" alt="Cliente" class="w-full h-full object-cover">
+                    <img src="assets/img/avatar-daniel.jpg" alt="Daniel Poblete" class="w-full h-full object-cover">
                 </div>
                 <div class="text-left">
-                    <span class="block font-bold">Ing. Carlos Mendoza</span>
-                    <span class="text-accent text-sm uppercase tracking-widest">CEO, Saigro</span>
+                    <span class="block font-bold">Daniel Poblete</span>
+                    <span class="text-accent text-sm uppercase tracking-widest">CEO, Los Castaños</span>
                 </div>
             </div>
         </div>
@@ -790,6 +826,7 @@
                             Proyecto</label>
                         <select id="project" name="project_type"
                             class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors appearance-none">
+                            <option value="Casa Futura (PH)">Casa Futura (PH)</option>
                             <option value="Vivienda Unifamiliar (Obra Nueva)">Vivienda Unifamiliar (Obra Nueva)</option>
                             <option value="Residencial de Lujo">Residencial de Lujo</option>
                             <option value="Comercial / Oficinas">Comercial / Oficinas</option>
@@ -891,13 +928,35 @@
         <div class="relative z-10 w-full max-w-6xl mx-auto px-6 max-h-screen overflow-y-auto opacity-0 translate-y-20 py-10"
             id="modal-content">
             <div class="bg-dark border border-white/10 flex flex-col md:flex-row shadow-2xl relative overflow-hidden">
-                <!-- Image Section with Hotspots Wrapper -->
+                <!-- Gallery Section -->
                 <div class="w-full md:w-1/2 relative aspect-[4/3] md:aspect-auto min-h-[300px] overflow-hidden"
                     id="modal-image-container">
-                    <img id="modal-image" src="" alt="Project Image"
-                        class="absolute inset-0 w-full h-full object-cover">
-                    <!-- Hotspots Container -->
-                    <div id="hotspots-wrapper" class="absolute inset-0 w-full h-full pointer-events-none"></div>
+                    <div class="gallery-container" id="project-gallery">
+                        <!-- Slides wrapper — populated dynamically by JS -->
+                        <div class="gallery-slides-wrapper" id="gallery-slides-wrapper"></div>
+
+                        <!-- Navigation Arrows -->
+                        <button class="gallery-nav-btn prev" id="gallery-prev" aria-label="Foto anterior">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button class="gallery-nav-btn next" id="gallery-next" aria-label="Foto siguiente">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+
+                        <!-- Counter -->
+                        <div class="gallery-counter" id="gallery-counter">1 / 4</div>
+
+                        <!-- Dots -->
+                        <div class="gallery-dots" id="gallery-dots"></div>
+                    </div>
                 </div>
 
                 <!-- Text Data Section -->
@@ -932,8 +991,8 @@
     </div>
 
     <!-- Custom Script -->
-    <script src="assets/js/projects.js?v=2.0"></script>
-    <script src="script.js?v=2.0"></script>
+    <script src="assets/js/projects.js?v=3.0"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 
 </html>

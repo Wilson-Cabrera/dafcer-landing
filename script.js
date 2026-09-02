@@ -7,81 +7,132 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Configuración de la Secuencia de Canvas y Precarga Inteligente
     const canvas = document.getElementById("hero-canvas");
-    const context = canvas.getContext("2d");
+    if (canvas) {
+        const context = canvas.getContext("2d");
 
-    const frameCount = 96; // Del 00 al 95 son 96 fotogramas
-    const currentFrame = index => (
-        `assets/img/sequence/frame_${index.toString().padStart(2, '0')}.jpg`
-    );
+        const frameCount = 96; // Del 00 al 95 son 96 fotogramas
+        const currentFrame = index => (
+            `assets/img/sequence/frame_${index.toString().padStart(2, '0')}.jpg`
+        );
 
-    const images = [];
-    const seq = { frame: 0 };
-    let loadedImagesCount = 0;
+        const images = [];
+        const seq = { frame: 0 };
+        let loadedImagesCount = 0;
 
-    const loaderPercentage = document.getElementById("loader-percentage");
-    const loaderBar = document.getElementById("loader-bar");
+        const loaderPercentage = document.getElementById("loader-percentage");
+        const loaderBar = document.getElementById("loader-bar");
 
-    // Estado inicial de las revelaciones
-    gsap.set(".reveal", { opacity: 0, y: 50 });
-    gsap.set("#loader-content", { opacity: 1 }); // Logo visible durante la carga
+        // Estado inicial de las revelaciones
+        gsap.set(".reveal", { opacity: 0, y: 50 });
+        gsap.set("#loader-content", { opacity: 1 }); // Logo visible durante la carga
 
-    const startApp = () => {
-        const tl = gsap.timeline();
-        tl.to("#preloader", {
-            y: "-100%",
-            duration: 1,
-            ease: "expo.inOut",
-            onComplete: () => {
-                ScrollTrigger.refresh();
+        const startApp = () => {
+            const tl = gsap.timeline();
+            tl.to("#preloader", {
+                y: "-100%",
+                duration: 1,
+                ease: "expo.inOut",
+                onComplete: () => {
+                    ScrollTrigger.refresh();
+                }
+            })
+                .to(".reveal", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: "power4.out",
+                    startAt: { y: 50, opacity: 0 }
+                }, "-=0.5");
+        };
+
+        const updateLoadingProgress = () => {
+            loadedImagesCount++;
+            const percentage = Math.round((loadedImagesCount / frameCount) * 100);
+
+            // Animamos el ancho de la barra
+            gsap.to(loaderBar, {
+                width: `${percentage}%`,
+                duration: 0.2,
+                ease: "power1.out"
+            });
+
+            // Actualizamos el porcentaje numérico
+            if (loaderPercentage) {
+                loaderPercentage.innerText = `${percentage}%`;
             }
-        })
-        .to(".reveal", {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.2,
-            ease: "power4.out",
-            startAt: { y: 50, opacity: 0 }
-        }, "-=0.5");
-    };
 
-    const updateLoadingProgress = () => {
-        loadedImagesCount++;
-        const percentage = Math.round((loadedImagesCount / frameCount) * 100);
-        
-        // Animamos el ancho de la barra
-        gsap.to(loaderBar, {
-            width: `${percentage}%`,
-            duration: 0.2,
-            ease: "power1.out"
+            if (loadedImagesCount === frameCount) {
+                setTimeout(startApp, 400); // Breve espera para deleite visual
+            }
+        };
+
+        // Comenzamos la precarga de todas las imágenes
+        for (let i = 0; i < frameCount; i++) {
+            const img = new Image();
+            img.onload = () => {
+                updateLoadingProgress();
+                // Dibujamos el primer fotograma inmediatamente en cuanto cargue
+                if (i === 0) {
+                    renderCanvas();
+                }
+            };
+            img.onerror = () => {
+                // Si alguna imagen falla, incrementamos igual para que no se trabe el loader
+                updateLoadingProgress();
+            };
+            img.src = currentFrame(i);
+            images.push(img);
+        }
+
+        // Hero Canvas Scroll Sequence
+        function renderCanvas() {
+            if (!images[seq.frame] || !images[seq.frame].complete) return;
+
+            const img = images[seq.frame];
+
+            if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            const canvasRatio = canvas.width / canvas.height;
+            const imgRatio = img.width / img.height;
+
+            let drawWidth, drawHeight, offsetX, offsetY;
+
+            if (canvasRatio > imgRatio) {
+                drawWidth = canvas.width;
+                drawHeight = canvas.width / imgRatio;
+                offsetX = 0;
+                offsetY = (canvas.height - drawHeight) / 2;
+            } else {
+                drawWidth = canvas.height * imgRatio;
+                drawHeight = canvas.height;
+                offsetX = (canvas.width - drawWidth) / 2;
+                offsetY = 0;
+            }
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+        }
+
+        window.addEventListener('resize', renderCanvas);
+
+        // Animación vinculada al scroll
+        gsap.to(seq, {
+            frame: frameCount - 1,
+            snap: "frame",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero-section",
+                start: "top top",
+                end: "+=300%", // La sección estará anclada durante 3 veces el alto de la pantalla
+                scrub: 0.5,
+                pin: true
+            },
+            onUpdate: renderCanvas
         });
-
-        // Actualizamos el porcentaje numérico
-        if (loaderPercentage) {
-            loaderPercentage.innerText = `${percentage}%`;
-        }
-
-        if (loadedImagesCount === frameCount) {
-            setTimeout(startApp, 400); // Breve espera para deleite visual
-        }
-    };
-
-    // Comenzamos la precarga de todas las imágenes
-    for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
-        img.onload = () => {
-            updateLoadingProgress();
-            // Dibujamos el primer fotograma inmediatamente en cuanto cargue
-            if (i === 0) {
-                renderCanvas();
-            }
-        };
-        img.onerror = () => {
-            // Si alguna imagen falla, incrementamos igual para que no se trabe el loader
-            updateLoadingProgress();
-        };
-        img.src = currentFrame(i);
-        images.push(img);
     }
 
     // 2. Navigation Scroll Effect
@@ -103,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleMenu = (open) => {
         isMenuOpen = open;
         mobileMenu.classList.toggle('active', isMenuOpen);
-        
+
         // Change icon to X
         if (isMenuOpen) {
             menuToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
@@ -115,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rotate: isMenuOpen ? 180 : 0,
             duration: 0.3
         });
-        
+
         // Prevent scroll when menu is open
         document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     };
@@ -129,55 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => toggleMenu(false));
     });
 
-    // 4. Hero Canvas Scroll Sequence
-    // Función para renderizar el fotograma actual manteniendo object-cover (Hoisted)
-    function renderCanvas() {
-        if(!images[seq.frame] || !images[seq.frame].complete) return;
-        
-        const img = images[seq.frame];
-        
-        if(canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        
-        const canvasRatio = canvas.width / canvas.height;
-        const imgRatio = img.width / img.height;
-        
-        let drawWidth, drawHeight, offsetX, offsetY;
-        
-        if (canvasRatio > imgRatio) {
-            drawWidth = canvas.width;
-            drawHeight = canvas.width / imgRatio;
-            offsetX = 0;
-            offsetY = (canvas.height - drawHeight) / 2;
-        } else {
-            drawWidth = canvas.height * imgRatio;
-            drawHeight = canvas.height;
-            offsetX = (canvas.width - drawWidth) / 2;
-            offsetY = 0;
-        }
-        
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-    }
-
-    window.addEventListener('resize', renderCanvas);
-
-    // Animación vinculada al scroll
-    gsap.to(seq, {
-        frame: frameCount - 1,
-        snap: "frame",
-        ease: "none",
-        scrollTrigger: {
-            trigger: "#hero-section",
-            start: "top top",
-            end: "+=300%", // La sección estará anclada durante 3 veces el alto de la pantalla
-            scrub: 0.5,
-            pin: true
-        },
-        onUpdate: renderCanvas
-    });
 
     // 5. Scroll Animations for Sections
 
@@ -214,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.utils.toArray('.reveal-img').forEach(container => {
         const img = container.querySelector('img');
 
-        gsap.fromTo(container, 
+        gsap.fromTo(container,
             {
                 opacity: 0,
                 scale: 0.9
@@ -231,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         );
 
-        gsap.fromTo(img, 
+        gsap.fromTo(img,
             {
                 scale: 1.2
             },
@@ -313,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoRevealContainer = document.getElementById('video-reveal-container');
 
     if (videoSection && video) {
-        
+
         // 1. ScrollTrigger Reveal for the whole section elements (animating to visible state)
         gsap.to(".reveal-video-text", {
             scrollTrigger: {
@@ -346,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
             onEnter: () => {
                 const sources = video.querySelectorAll('source');
                 let needsLoad = false;
-                
+
                 sources.forEach(source => {
                     if (source.getAttribute('data-src') && !source.getAttribute('src')) {
                         source.setAttribute('src', source.getAttribute('data-src'));
@@ -395,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Interactive Magnetic Button Hover Effect
         videoWrapper.addEventListener('mousemove', (e) => {
             const rect = videoWrapper.getBoundingClientRect();
-            
+
             // Mouse position relative to the video wrapper
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
@@ -484,99 +486,223 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. Project Modal Logic
+    // 8. Project Modal Logic (Gallery Version)
 
     const modal = document.getElementById('project-modal');
     if (modal) {
         const modalBackdrop = document.getElementById('modal-backdrop');
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close');
-        const hotspotsWrapper = document.getElementById('hotspots-wrapper');
 
         const mTitle = document.getElementById('modal-title');
         const mCategory = document.getElementById('modal-category');
         const mLocation = document.getElementById('modal-location');
         const mSurface = document.getElementById('modal-surface');
         const mYear = document.getElementById('modal-year');
-        const mImage = document.getElementById('modal-image');
         const mDesc = document.getElementById('modal-description');
 
+        // Gallery elements
+        const slidesWrapper = document.getElementById('gallery-slides-wrapper');
+        const dotsContainer = document.getElementById('gallery-dots');
+        const counterEl = document.getElementById('gallery-counter');
+        const prevBtn = document.getElementById('gallery-prev');
+        const nextBtn = document.getElementById('gallery-next');
+
+        let currentSlide = 0;
+        let totalSlides = 0;
+        let isModalOpen = false;
+
+        // --- Gallery helpers ---
+
+        const renderHotspots = (slideEl, hotspots) => {
+            if (!hotspots || hotspots.length === 0) return;
+            const hotspotsLayer = document.createElement('div');
+            hotspotsLayer.className = 'absolute inset-0 w-full h-full pointer-events-none';
+
+            hotspots.forEach(spot => {
+                const spotEl = document.createElement('div');
+                spotEl.className = 'hotspot';
+                spotEl.style.left = `${spot.x}%`;
+                spotEl.style.top = `${spot.y}%`;
+
+                spotEl.innerHTML = `
+                    <div class="hotspot-trigger">
+                        <div class="hotspot-trigger-inner"></div>
+                    </div>
+                    <div class="hotspot-tooltip">${spot.text}</div>
+                `;
+
+                // Mobile touch support
+                spotEl.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isActive = spotEl.classList.contains('active');
+                    slideEl.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+                    if (!isActive) {
+                        spotEl.classList.add('active');
+                    }
+                });
+
+                hotspotsLayer.appendChild(spotEl);
+            });
+
+            slideEl.appendChild(hotspotsLayer);
+        };
+
+        const buildGallery = (images) => {
+            // Clear previous content
+            slidesWrapper.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            currentSlide = 0;
+            totalSlides = images.length;
+
+            images.forEach((imgData, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide' + (index === 0 ? ' active' : '');
+                slide.setAttribute('data-slide-index', index);
+
+                const img = document.createElement('img');
+                img.src = imgData.src;
+                img.alt = `Foto ${index + 1}`;
+                img.loading = index === 0 ? 'eager' : 'lazy';
+                slide.appendChild(img);
+
+                // Add hotspots to this slide
+                renderHotspots(slide, imgData.hotspots);
+
+                slidesWrapper.appendChild(slide);
+
+                // Create dot
+                const dot = document.createElement('button');
+                dot.className = 'gallery-dot' + (index === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Ir a foto ${index + 1}`);
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    goToSlide(index);
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            // Update counter
+            counterEl.textContent = `1 / ${totalSlides}`;
+        };
+
+        const goToSlide = (index) => {
+            if (index === currentSlide || index < 0 || index >= totalSlides) return;
+
+            const slides = slidesWrapper.querySelectorAll('.gallery-slide');
+            const dots = dotsContainer.querySelectorAll('.gallery-dot');
+
+            // Fade out current hotspots
+            const currentHotspots = slides[currentSlide].querySelectorAll('.hotspot');
+            if (currentHotspots.length > 0) {
+                gsap.to(currentHotspots, { opacity: 0, scale: 0, duration: 0.2, ease: 'power2.in' });
+            }
+
+            // Switch slides
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+
+            currentSlide = index;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            // Update counter
+            counterEl.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+            // Animate in new hotspots
+            const newHotspots = slides[currentSlide].querySelectorAll('.hotspot');
+            if (newHotspots.length > 0) {
+                gsap.fromTo(newHotspots,
+                    { opacity: 0, scale: 0 },
+                    { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)', delay: 0.25 }
+                );
+            }
+        };
+
+        const nextSlide = () => {
+            const next = (currentSlide + 1) % totalSlides;
+            goToSlide(next);
+        };
+
+        const prevSlide = () => {
+            const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(prev);
+        };
+
+        // --- Keyboard navigation ---
+        const handleKeyboard = (e) => {
+            if (!isModalOpen) return;
+            if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Escape') closeModal();
+        };
+
+        // --- Arrow button events ---
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); });
+
+        // --- Open Modal ---
         const openModal = (projectId) => {
             const data = projectsData[projectId];
             if (!data) return;
 
-            // Populate data
+            // Populate text data
             mTitle.innerText = data.title;
             mCategory.innerText = data.category;
             mLocation.innerText = data.location;
             mSurface.innerText = data.surface;
             mYear.innerText = data.year;
-            mImage.src = data.image;
             mDesc.innerText = data.description;
 
-            // Render hotspots
-            if (hotspotsWrapper) {
-                hotspotsWrapper.innerHTML = '';
-                if (data.hotspots && data.hotspots.length > 0) {
-                    data.hotspots.forEach(spot => {
-                        const spotEl = document.createElement('div');
-                        spotEl.className = 'hotspot';
-                        spotEl.style.left = `${spot.x}%`;
-                        spotEl.style.top = `${spot.y}%`;
-
-                        spotEl.innerHTML = `
-                            <div class="hotspot-trigger">
-                                <div class="hotspot-trigger-inner"></div>
-                            </div>
-                            <div class="hotspot-tooltip">${spot.text}</div>
-                        `;
-
-                        // Mobile touch support
-                        spotEl.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const isActive = spotEl.classList.contains('active');
-                            document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-                            if (!isActive) {
-                                spotEl.classList.add('active');
-                            }
-                        });
-
-                        hotspotsWrapper.appendChild(spotEl);
-                    });
-                }
-            }
+            // Build gallery
+            buildGallery(data.images);
 
             // Show modal container
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             modal.style.pointerEvents = 'auto';
             document.body.classList.add('modal-open');
+            isModalOpen = true;
 
             // GSAP Animation In
             const tl = gsap.timeline();
             tl.to(modalBackdrop, { opacity: 1, duration: 0.4, ease: 'power2.out' })
-              .to(modalCloseBtn, { opacity: 1, pointerEvents: 'auto', duration: 0.3 }, "-=0.2")
-              .to(modalContent, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, "-=0.3")
-              .fromTo('.hotspot', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, "-=0.2");
+                .to(modalCloseBtn, { opacity: 1, pointerEvents: 'auto', duration: 0.3 }, "-=0.2")
+                .to(modalContent, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, "-=0.3")
+                .fromTo('.gallery-slide.active .hotspot', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, "-=0.2");
+
+            // Enable keyboard
+            document.addEventListener('keydown', handleKeyboard);
         };
 
+        // --- Close Modal ---
         const closeModal = () => {
-            // GSAP Animation Out
+            isModalOpen = false;
+            document.removeEventListener('keydown', handleKeyboard);
+
             const tl = gsap.timeline({
                 onComplete: () => {
                     modal.classList.add('hidden');
                     modal.classList.remove('flex');
                     modal.style.pointerEvents = 'none';
                     document.body.classList.remove('modal-open');
-                    if (hotspotsWrapper) hotspotsWrapper.innerHTML = ''; // Clear DOM
-                    gsap.set(modalContent, { y: 20 }); // reset position for next time
+
+                    // Clear gallery
+                    slidesWrapper.innerHTML = '';
+                    dotsContainer.innerHTML = '';
+                    currentSlide = 0;
+                    totalSlides = 0;
+
+                    gsap.set(modalContent, { y: 20 });
                 }
             });
-            
-            tl.to('.hotspot', { opacity: 0, scale: 0, duration: 0.2, stagger: 0.05, ease: 'power2.in' })
-              .to(modalContent, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' }, "-=0.1")
-              .to(modalCloseBtn, { opacity: 0, pointerEvents: 'none', duration: 0.2 }, "-=0.1")
-              .to(modalBackdrop, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, "-=0.1");
+
+            tl.to('.gallery-slide.active .hotspot', { opacity: 0, scale: 0, duration: 0.2, stagger: 0.05, ease: 'power2.in' })
+                .to(modalContent, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' }, "-=0.1")
+                .to(modalCloseBtn, { opacity: 0, pointerEvents: 'none', duration: 0.2 }, "-=0.1")
+                .to(modalBackdrop, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, "-=0.1");
         };
 
         // Attach events to project cards
@@ -591,7 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalCloseBtn.addEventListener('click', closeModal);
         modalBackdrop.addEventListener('click', closeModal);
 
-        // Close tooltips on content/backdrop click
+        // Close hotspot tooltips on content click
         modal.addEventListener('click', () => {
             document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
         });

@@ -248,6 +248,173 @@ body.modal-open {
     transform: translateX(-50%) translateY(0);
 }
 
+/* Project Gallery Carousel */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery-slides-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Gallery Navigation Arrows */
+.gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 0;
+}
+
+.gallery-container:hover .gallery-nav-btn {
+    opacity: 1;
+}
+
+.gallery-nav-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--dark);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.gallery-nav-btn.prev {
+    left: 12px;
+}
+
+.gallery-nav-btn.next {
+    right: 12px;
+}
+
+/* Gallery Dots */
+.gallery-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    display: flex;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+}
+
+.gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border: none;
+    padding: 0;
+}
+
+.gallery-dot:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.gallery-dot.active {
+    background: var(--primary);
+    transform: scale(1.25);
+    box-shadow: 0 0 8px rgba(243, 129, 31, 0.5);
+}
+
+/* Gallery Counter */
+.gallery-counter {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 15;
+    padding: 5px 12px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+/* Mobile gallery adjustments */
+@media (max-width: 768px) {
+    .gallery-nav-btn {
+        opacity: 1;
+        width: 36px;
+        height: 36px;
+    }
+
+    .gallery-nav-btn.prev {
+        left: 8px;
+    }
+
+    .gallery-nav-btn.next {
+        right: 8px;
+    }
+
+    .gallery-counter {
+        top: 8px;
+        right: 8px;
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+
+    .gallery-dots {
+        bottom: 10px;
+        gap: 6px;
+        padding: 5px 10px;
+    }
+
+    .gallery-dot {
+        width: 7px;
+        height: 7px;
+    }
+}
+
 /* Responsiveness Tweaks */
 @media (max-width: 768px) {
     .section-title {
@@ -297,3 +464,30 @@ body.modal-open {
         linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
 }
+
+/* ═══════════════════════════════════════════ */
+/* Casa Futura — Exclusive Section            */
+/* ═══════════════════════════════════════════ */
+
+.reveal-casa-futura {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+/* Feature items stagger animation base */
+.casa-futura-item {
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 8px 12px;
+    margin-left: -12px;
+    border-radius: 4px;
+}
+
+.casa-futura-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Technical frame corner pulse on hover */
+.casa-futura-frame:hover > div[class*="border-primary"] {
+    border-color: rgba(243, 129, 31, 0.8);
+}
+

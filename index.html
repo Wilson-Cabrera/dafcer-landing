@@ -8,18 +8,14 @@
     <meta name="description"
         content="DAFCER Construcciones y servicios. Muy pronto, una nueva experiencia digital. Registrate para ser el primero en saberlo.">
 
-    <!-- ╔══════════════════════════════════════════════╗
-         ║  AUTO-LAUNCH: redirect to landing on date  ║
-         ║  Fecha objetivo: 07 Nov 2026 00:00 AR      ║
-         ╚══════════════════════════════════════════════╝ -->
+    <!-- Test mode: 15s countdown for testing auto-redirect -->
     <script>
-        (function () {
-            var launchDate = new Date('2026-11-07T00:00:00');
-            if (new Date() >= launchDate) {
-                // Launch date reached — go straight to the real landing page
-                window.location.replace('landing.html');
-            }
-        })();
+        // Guardamos la fecha de fin de prueba para la sesión actual (15 segundos)
+        let testTarget = sessionStorage.getItem('launch_test_time');
+        if (!testTarget) {
+            testTarget = Date.now() + 15000;
+            sessionStorage.setItem('launch_test_time', testTarget);
+        }
     </script>
 
     <!-- Favicon -->
@@ -102,15 +98,20 @@
         }
 
         @keyframes kenburns {
-            0%   { transform: scale(1); }
-            100% { transform: scale(1.15); }
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
         }
 
         /* Dark overlay */
         .kb-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0.88));
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.88));
             z-index: 1;
         }
 
@@ -203,10 +204,25 @@
         }
 
         @keyframes coinFlip {
-            0%   { transform: perspective(200px) rotateX(0deg);    color: #ffffff; }
-            35%  { transform: perspective(200px) rotateX(90deg);   color: #F3811F; }
-            65%  { transform: perspective(200px) rotateX(-90deg);  color: #F3811F; }
-            100% { transform: perspective(200px) rotateX(0deg);    color: #ffffff; }
+            0% {
+                transform: perspective(200px) rotateX(0deg);
+                color: #ffffff;
+            }
+
+            35% {
+                transform: perspective(200px) rotateX(90deg);
+                color: #F3811F;
+            }
+
+            65% {
+                transform: perspective(200px) rotateX(-90deg);
+                color: #F3811F;
+            }
+
+            100% {
+                transform: perspective(200px) rotateX(0deg);
+                color: #ffffff;
+            }
         }
 
         /* Orange colon separators */
@@ -222,8 +238,15 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 0.75; }
-            50%       { opacity: 0.2; }
+
+            0%,
+            100% {
+                opacity: 0.75;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
         }
 
         /* Unit labels */
@@ -242,7 +265,8 @@
             align-items: center;
             gap: 0.6rem;
             margin-top: 0.85rem;
-            padding-left: 5.25rem; /* aligns with the units, after accent bar */
+            padding-left: 5.25rem;
+            /* aligns with the units, after accent bar */
         }
 
         .countdown-date-tag::before {
@@ -297,8 +321,7 @@
 
         <!-- Logo — top-left branding anchor -->
         <div id="cs-logo" class="absolute top-8 left-8 z-20 opacity-0">
-            <img src="assets/img/logo.svg" alt="DAFCER Logo"
-                class="h-10 md:h-14 w-auto transform translate-x-[13%]">
+            <img src="assets/img/logo.svg" alt="DAFCER Logo" class="h-10 md:h-14 w-auto transform translate-x-[13%]">
         </div>
 
         <!-- Main Content -->
@@ -365,7 +388,8 @@
 
                 <!-- Description -->
                 <p id="cs-desc" class="text-base md:text-lg text-white/60 mb-8 max-w-md opacity-0">
-                    Estamos construyendo una nueva experiencia digital para mostrar la calidad, trayectoria y compromiso que
+                    Estamos construyendo una nueva experiencia digital para mostrar la calidad, trayectoria y compromiso
+                    que
                     nos representa en cada obra.
                 </p>
 
@@ -408,18 +432,18 @@
             // ── GSAP entrance animations ──────────────────────────────────
             const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-            tl.to("#cs-logo",      { opacity: 1, y: 0, duration: 1.5, startAt: { y: 20 } })
-              .to("#cs-tagline",   { opacity: 1, y: 0, duration: 1,   startAt: { y: 20 } }, "-=1")
-              .to("#cs-title",     { opacity: 1, y: 0, duration: 1.5, startAt: { y: 30 } }, "-=0.8")
-              .to("#cs-countdown", { opacity: 1, y: 0, duration: 1,   startAt: { y: 20 } }, "-=0.8")
-              .to("#cs-desc",      { opacity: 1, y: 0, duration: 1,   startAt: { y: 20 } }, "-=0.7")
-              .to("#cs-form",      { opacity: 1, y: 0, duration: 1,   startAt: { y: 20 } }, "-=0.8")
-              .to(["#cs-social", "#cs-footer"], { opacity: 1, duration: 1, stagger: 0.2 }, "-=0.5");
+            tl.to("#cs-logo", { opacity: 1, y: 0, duration: 1.5, startAt: { y: 20 } })
+                .to("#cs-tagline", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=1")
+                .to("#cs-title", { opacity: 1, y: 0, duration: 1.5, startAt: { y: 30 } }, "-=0.8")
+                .to("#cs-countdown", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=0.8")
+                .to("#cs-desc", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=0.7")
+                .to("#cs-form", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=0.8")
+                .to(["#cs-social", "#cs-footer"], { opacity: 1, duration: 1, stagger: 0.2 }, "-=0.5");
 
 
             // ── Ken Burns Slider ──────────────────────────────────────────
-            const slides  = document.querySelectorAll('.kb-slide');
-            let   current = 0;
+            const slides = document.querySelectorAll('.kb-slide');
+            let current = 0;
 
             setInterval(() => {
                 slides[current].classList.remove('active');
@@ -428,14 +452,14 @@
             }, 6000);
 
 
-            // ── Countdown Timer ───────────────────────────────────────────
-            // Target: November 7, 2026 at 00:00:00 (local time)
-            const launchDate = new Date('2026-11-07T00:00:00');
+            // ── Countdown Timer (Test Mode: 15s) ──────────────────────────
+            const targetTimestamp = parseInt(sessionStorage.getItem('launch_test_time')) || (Date.now() + 15000);
+            const launchDate = new Date(targetTimestamp);
 
-            const elDays  = document.getElementById('cd-days');
+            const elDays = document.getElementById('cd-days');
             const elHours = document.getElementById('cd-hours');
-            const elMins  = document.getElementById('cd-mins');
-            const elSecs  = document.getElementById('cd-secs');
+            const elMins = document.getElementById('cd-mins');
+            const elSecs = document.getElementById('cd-secs');
 
             function pad(n) {
                 return String(Math.max(0, n)).padStart(2, '0');
@@ -453,25 +477,29 @@
             }
 
             function updateCountdown() {
-                const now  = new Date();
+                const now = new Date();
                 const diff = launchDate - now;
 
                 if (diff <= 0) {
                     [elDays, elHours, elMins, elSecs].forEach(el => {
                         el.textContent = '00';
                     });
+                    // Redirigir automáticamente a la landing
+                    setTimeout(() => {
+                        window.location.replace('landing.html');
+                    }, 500);
                     return;
                 }
 
-                const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-                flipUpdate(elDays,  days);
+                flipUpdate(elDays, days);
                 flipUpdate(elHours, hours);
-                flipUpdate(elMins,  mins);
-                flipUpdate(elSecs,  secs);
+                flipUpdate(elMins, mins);
+                flipUpdate(elSecs, secs);
             }
 
             // Run immediately, then every second
@@ -483,16 +511,16 @@
             const form = document.getElementById('cs-form');
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const btn  = form.querySelector('button');
+                const btn = form.querySelector('button');
                 const data = new FormData(form);
 
                 btn.innerText = "ENVIANDO...";
-                btn.disabled  = true;
+                btn.disabled = true;
 
                 try {
                     const response = await fetch(form.action, {
-                        method:  'POST',
-                        body:    data,
+                        method: 'POST',
+                        body: data,
                         headers: { 'Accept': 'application/json' }
                     });
 
@@ -510,7 +538,7 @@
 
                 setTimeout(() => {
                     btn.innerText = "NOTIFICARME";
-                    btn.disabled  = false;
+                    btn.disabled = false;
                     btn.classList.remove('bg-white', 'bg-red-500');
                 }, 3000);
             });

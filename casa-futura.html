@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Futura | DAFCER — Servicio Exclusivo</title>
+    <meta name="description"
+        content="Casa Futura by DAFCER: viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#F3811F',
+                        secondary: '#F4821F',
+                        accent: '#5C5A5D',
+                        dark: '#000000',
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=5">
+
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="bg-dark text-white font-body selection:bg-primary selection:text-dark overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center transition-all duration-500"
+        id="main-nav">
+        <a href="landing.html" class="flex items-center group">
+            <img src="assets/img/logo.svg" alt="DAFCER"
+                class="h-10 md:h-14 w-auto transition-transform duration-500 group-hover:scale-110">
+        </a>
+
+        <div class="hidden md:flex gap-10 items-center">
+            <a href="landing.html#servicios"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Servicios</a>
+            <a href="landing.html#proyectos"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Proyectos</a>
+            <a href="landing.html#beneficios"
+                class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest">Nosotros</a>
+            <a href="casa-futura.html"
+                class="text-sm font-medium text-primary transition-colors uppercase tracking-widest flex items-center gap-2">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                Casa Futura
+            </a>
+            <a href="#contacto"
+                class="bg-primary text-dark px-8 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm text-xs tracking-widest">CONTACTO</a>
+        </div>
+
+        <button class="md:hidden text-3xl" id="menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[49] bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500">
+        <button class="absolute top-8 right-8 text-4xl text-white" id="menu-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <a href="landing.html"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Inicio</a>
+        <a href="landing.html#servicios"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Servicios</a>
+        <a href="landing.html#proyectos"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Proyectos</a>
+        <a href="casa-futura.html"
+            class="text-3xl md:text-4xl font-display font-extrabold text-primary transition-colors uppercase flex items-center gap-4">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+            </span>
+            Casa Futura
+        </a>
+        <a href="#contacto"
+            class="text-3xl md:text-4xl font-display font-extrabold text-white/50 uppercase">Contacto</a>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="relative min-h-[60vh] md:min-h-[70vh] flex items-end pb-16 md:pb-24 px-6 md:px-12 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/img/casafutura.jpeg" alt="Casa Futura" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/70 to-dark/30"></div>
+            <div class="absolute inset-0 opacity-15 pointer-events-none mix-blend-soft-light"
+                style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto w-full">
+            <div class="flex items-center gap-4 mb-6 cf-reveal">
+                <div class="bg-primary text-dark px-4 py-2 flex items-center gap-2">
+
+                    <span class="text-[10px] font-extrabold tracking-[0.3em] uppercase font-display">Venta en
+                        pozo</span>
+                </div>
+                <div class="h-[1px] flex-grow bg-white/10 hidden md:block"></div>
+            </div>
+
+            <h1
+                class="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold leading-[0.92] tracking-tighter uppercase cf-reveal">
+                Casa <br>
+                <span class="stroke-text italic">Futura</span>
+            </h1>
+
+            <p class="mt-6 text-lg md:text-xl font-body font-light text-white/50 max-w-xl cf-reveal">
+                Tu casa puede empezar a construirse hoy.
+                Con Casa Futura PH invertís en una vivienda moderna de 2 dormitorios, diseñada para brindar confort,
+                funcionalidad y calidad en cada detalle.
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 cf-reveal">
+            <span class="text-[9px] uppercase tracking-[0.4em] text-white/40">Descubrí más</span>
+            <div class="w-[1px] h-12 bg-white/10 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-primary animate-scroll"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section class="relative py-24 md:py-32 px-6 md:px-12 bg-dark overflow-hidden border-t border-white/5">
+        <!-- Background grid -->
+        <div class="absolute inset-0 z-0 opacity-[0.015] pointer-events-none"
+            style="background-image: linear-gradient(rgba(243,129,31,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(243,129,31,0.3) 1px, transparent 1px); background-size: 80px 80px;">
+        </div>
+
+        <!-- Watermark -->
+        <div
+            class="absolute -bottom-16 -right-10 text-[18vw] font-display font-black text-white/[0.015] select-none pointer-events-none leading-none tracking-tighter">
+            FUTURA</div>
+
+        <div class="relative z-10 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+
+                <!-- Left Column: Image with Technical Frame -->
+                <div class="lg:col-span-7 relative cf-reveal">
+                    <!-- Technical CAD Frame -->
+                    <div
+                        class="casa-futura-frame relative p-2 bg-white/[0.03] border border-white/10 rounded-sm overflow-hidden group transition-all duration-700 hover:border-primary/30">
+                        <!-- Corner Crosshairs -->
+                        <div
+                            class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+
+                        <!-- Image -->
+                        <div class="aspect-[16/11] bg-dark overflow-hidden rounded-xs relative">
+                            <img src="assets/img/casafutura.jpeg" alt="Casa Futura — Proyecto Exclusivo DAFCER"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-dark/40 via-transparent to-transparent pointer-events-none">
+                            </div>
+                        </div>
+
+                        <!-- Bottom technical data strip -->
+                        <div
+                            class="absolute bottom-4 right-4 z-30 flex items-center gap-3 bg-dark/80 backdrop-blur-sm border border-white/10 px-4 py-2">
+                            <span class="text-[9px] uppercase tracking-[0.2em] text-white/40 font-mono">Ref:
+                                CF-2026</span>
+                            <div class="w-[1px] h-3 bg-white/20"></div>
+                            <span class="text-[9px] uppercase tracking-[0.2em] text-primary font-mono font-bold">P.H.
+                                120 m²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Specs -->
+                <div class="lg:col-span-5 flex flex-col gap-8">
+                    <!-- Tag -->
+                    <div class="flex items-center gap-4 cf-reveal">
+                        <div class="w-12 h-[1px] bg-primary"></div>
+                        <span
+                            class="text-xs font-bold tracking-[0.5em] uppercase text-primary font-mono">Especificaciones</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h2
+                        class="text-3xl md:text-4xl lg:text-5xl font-display font-extrabold leading-[0.95] tracking-tighter uppercase cf-reveal">
+                        El proyecto <br>
+                        <span class="text-primary italic">en detalle</span>
+                    </h2>
+
+                    <!-- Description -->
+                    <p class="text-base md:text-lg font-body font-light leading-relaxed text-white/55 cf-reveal">
+                        Un proyecto exclusivo de DAFCER diseñado para quienes buscan acceder a su primera vivienda
+                        con la solidez y la calidad que nos distingue.
+                    </p>
+
+                    <!-- Divider -->
+                    <div class="w-full h-[1px] bg-white/10 cf-reveal"></div>
+
+                    <!-- Feature Items -->
+                    <div class="flex flex-col gap-3 cf-reveal">
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Vivienda
+                                de construcción tradicional</span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Lotes
+                                en P.H. desde 100 m² aprox</span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                    <rect x="1" y="3" width="22" height="5"></rect>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">66
+                                m² cubiertos
+                            </span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <path d="M2 4v16h20V4H2z"></path>
+                                    <path d="M2 12h8v8H2z"></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">2
+                                habitaciones
+                            </span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Cocina-comedor
+                                integrada
+                            </span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <path
+                                        d="M22 12h-6a2 2 0 0 0-2 2v1a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2">
+                                    </path>
+                                    <path
+                                        d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Baño</span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <line x1="6" y1="3" x2="6" y2="15"></line>
+                                    <circle cx="18" cy="6" r="3"></circle>
+                                    <circle cx="6" cy="18" r="3"></circle>
+                                    <path d="M18 9a9 9 0 0 1-9 9"></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Patio
+                                de servicio
+                            </span>
+                        </div>
+
+                        <div class="casa-futura-item flex items-center gap-4 group cursor-default">
+                            <div
+                                class="flex-shrink-0 w-9 h-9 border border-primary/20 bg-primary/5 flex items-center justify-center rounded-sm transition-all duration-300 group-hover:bg-primary group-hover:border-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary/80 group-hover:text-dark transition-colors">
+                                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Sistema
+                                de calefacción por losa radiante
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="mt-4 cf-reveal">
+                        <a href="#contacto"
+                            class="group relative inline-flex items-center gap-4 py-5 px-10 border border-primary overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-primary/10">
+                            <span
+                                class="relative z-10 text-xs font-bold tracking-[0.3em] uppercase text-primary group-hover:text-dark transition-colors duration-300">Consultar
+                                Proyecto</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="relative z-10 text-primary group-hover:text-dark transition-colors duration-300 group-hover:translate-x-1 transform">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                            <div
+                                class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-32 px-6 md:px-12 bg-white text-dark">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
+            <div>
+                <h2 class="text-4xl md:text-7xl font-display font-extrabold tracking-tighter mb-8">HABLEMOS <br> DE TU
+                    <span class="text-primary italic">PROYECTO</span>
+                </h2>
+                <p class="text-lg text-accent mb-12 max-w-md">¿Tienes un proyecto en mente? Nuestro equipo de expertos
+                    está listo para asesorarte y llevar tu visión al siguiente nivel.</p>
+
+                <div class="space-y-6">
+                    <div class="flex items-center gap-6 group">
+                        <div
+                            class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold">+54 9 2996 03-5875</span>
+                    </div>
+                    <div class="flex items-center gap-6 group">
+                        <div
+                            class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold">info@dafcer.com</span>
+                    </div>
+                    <div class="flex items-center gap-6 group">
+                        <div
+                            class="w-12 h-12 border border-accent/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold">Neuquén • Cobertura Nacional</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-accent/5 p-10 md:p-16 border border-accent/10">
+                <form id="contact-form" action="https://formspree.io/f/xrejdpbq" method="POST" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label for="name" class="text-xs font-bold uppercase tracking-widest text-accent">Nombre
+                                Completo</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="email"
+                                class="text-xs font-bold uppercase tracking-widest text-accent">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="project" class="text-xs font-bold uppercase tracking-widest text-accent">Tipo de
+                            Proyecto</label>
+                        <select id="project" name="project_type"
+                            class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors appearance-none">
+                            <option value="Casa Futura (PH)" selected>Casa Futura (PH)</option>
+                            <option value="Vivienda Unifamiliar (Obra Nueva)">Vivienda Unifamiliar (Obra Nueva)</option>
+                            <option value="Residencial de Lujo">Residencial de Lujo</option>
+                            <option value="Comercial / Oficinas">Comercial / Oficinas</option>
+                            <option value="Complejos de Departamentos / Duplex">Complejos de Departamentos / Duplex
+                            </option>
+                            <option value="Remodelación / Ampliación">Remodelación / Ampliación</option>
+                            <option value="Estructuras / Hormigón">Estructuras / Hormigón</option>
+                            <option value="Movimiento de Suelos">Movimiento de Suelos</option>
+                            <option value="Excavaciones">Excavaciones</option>
+                            <option value="Construcción de Piscinas">Construcción de Piscinas</option>
+                            <option value="Construcción de SUM / Quinchos">Construcción de SUM / Quinchos</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="message" class="text-xs font-bold uppercase tracking-widest text-accent">Cuéntanos
+                            más</label>
+                        <textarea id="message" name="message" rows="4"
+                            class="w-full bg-transparent border-b border-accent/30 py-4 focus:border-primary focus:outline-none transition-colors resize-none"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-dark text-white py-6 font-bold tracking-[0.2em] hover:bg-primary hover:text-dark transition-all duration-500 uppercase text-xs">
+                        Enviar Solicitud
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark pt-24 pb-12 px-6 md:px-12 border-t border-accent/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
+                <div class="max-w-xs">
+                    <a href="landing.html" class="inline-block mb-8">
+                        <img src="assets/img/logo.svg" alt="DAFCER" class="h-16 w-auto">
+                    </a>
+                    <p class="text-accent">Dedicados a elevar los estándares de la construcción moderna a través de la
+                        innovación y la excelencia técnica.</p>
+                </div>
+
+                <div class="flex flex-col md:grid md:grid-cols-3 gap-12 md:gap-24 w-full">
+                    <div>
+                        <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Empresa</h5>
+                        <ul class="space-y-4 text-accent text-sm">
+                            <li><a href="landing.html" class="hover:text-primary transition-colors">Inicio</a></li>
+                            <li><a href="landing.html#proyectos"
+                                    class="hover:text-primary transition-colors">Proyectos</a></li>
+                            <li><a href="#contacto" class="hover:text-primary transition-colors">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Servicios</h5>
+                        <ul class="space-y-4 text-accent text-sm">
+                            <li><a href="landing.html#servicios"
+                                    class="hover:text-primary transition-colors">Residencial</a></li>
+                            <li><a href="landing.html#servicios"
+                                    class="hover:text-primary transition-colors">Comercial</a></li>
+                            <li><a href="casa-futura.html" class="text-primary font-medium">Casa Futura</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Social</h5>
+                        <ul class="space-y-4 text-accent text-sm">
+                            <li><a href="https://www.instagram.com/dafcer.servicios/" target="_blank"
+                                    class="hover:text-primary transition-colors">Instagram</a></li>
+                            <li><a href="https://wa.me/5492996035875" target="_blank"
+                                    class="hover:text-primary transition-colors">WhatsApp</a></li>
+                            <li><a href="https://www.facebook.com/share/1Ey2xsErUL/" target="_blank"
+                                    class="hover:text-primary transition-colors">Facebook</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-accent/5 gap-8">
+                <p class="text-accent text-xs">© 2026 DAFCER Construcciones. Todos los derechos reservados.</p>
+                <div class="flex gap-8 text-accent text-xs uppercase tracking-widest font-bold">
+                    <a href="landing.html" class="hover:text-primary transition-colors">Inicio</a>
+                    <a href="#contacto" class="hover:text-primary transition-colors">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Page Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Navigation scroll state
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuClose = document.getElementById('menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => mobileMenu.classList.add('active'));
+            }
+            if (menuClose && mobileMenu) {
+                menuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
+            }
+            // Close mobile menu on link click
+            if (mobileMenu) {
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+                });
+            }
+
+            // Hero reveal on load (only hero elements)
+            gsap.from(".cf-reveal", {
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.12,
+                ease: "power3.out",
+                delay: 0.2
+            });
+
+            // Form Submission (Real via Formspree)
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const btn = contactForm.querySelector('button');
+                    const originalText = btn.innerText;
+                    const data = new FormData(contactForm);
+
+                    btn.innerText = "ENVIANDO...";
+                    btn.disabled = true;
+
+                    try {
+                        const response = await fetch(contactForm.action, {
+                            method: 'POST',
+                            body: data,
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            btn.innerText = "¡ENVIADO!";
+                            btn.classList.add('bg-green-600', 'text-white');
+                            contactForm.reset();
+                        } else {
+                            throw new Error('Error en el envío');
+                        }
+                    } catch (error) {
+                        btn.innerText = "ERROR AL ENVIAR";
+                        btn.classList.add('bg-red-600', 'text-white');
+                    }
+
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        btn.classList.remove('bg-green-600', 'bg-red-600', 'text-white');
+                    }, 4000);
+                });
+            }
+
+            // Smooth Scroll for all anchors
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href === '') return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
