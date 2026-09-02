@@ -8,11 +8,18 @@
     <meta name="description"
         content="DAFCER Construcciones y servicios. Muy pronto, una nueva experiencia digital. Registrate para ser el primero en saberlo.">
 
-    <!-- Test mode: 30s countdown for testing auto-redirect -->
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  AUTO-LAUNCH: redirect to landing on date  ║
+         ║  Fecha objetivo: 03 Sep 2026 12:00 AR      ║
+         ╚══════════════════════════════════════════════╝ -->
     <script>
-        // Nueva cuenta de 30 segundos para la prueba
-        let testTarget = Date.now() + 30000;
-        sessionStorage.setItem('launch_test_time', testTarget);
+        (function () {
+            var launchDate = new Date('2026-09-03T12:00:00');
+            if (new Date() >= launchDate) {
+                // Launch date reached — go straight to the real landing page
+                window.location.replace('landing.html');
+            }
+        })();
     </script>
 
     <!-- Favicon -->
@@ -449,9 +456,9 @@
             }, 6000);
 
 
-            // ── Countdown Timer (Test Mode: 30s) ──────────────────────────
-            const targetTimestamp = parseInt(sessionStorage.getItem('launch_test_time')) || (Date.now() + 30000);
-            const launchDate = new Date(targetTimestamp);
+            // ── Countdown Timer ───────────────────────────────────────────
+            // Target: September 3, 2026 at 12:00:00 (local time)
+            const launchDate = new Date('2026-09-03T12:00:00');
 
             const elDays = document.getElementById('cd-days');
             const elHours = document.getElementById('cd-hours');
