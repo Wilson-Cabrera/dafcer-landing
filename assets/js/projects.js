@@ -135,13 +135,13 @@ const projectsData = {
                 ]
             },
             {
-                src: 'assets/img/Proyecto_Lc1.png',
+                src: 'assets/img/Proyecto_LC1.png',
                 hotspots: [
                     { x: 56, y: 50, text: 'Amoblamiento personalizado a medida' }
                 ]
             },
             {
-                src: 'assets/img/Proyecto_Lc2.png',
+                src: 'assets/img/Proyecto_LC2.png',
                 hotspots: [
                     { x: 56, y: 50, text: 'Bacha inteligente Smart' },
                     { x: 50, y: 80, text: 'Mesada en Silestone Calacatta' }
