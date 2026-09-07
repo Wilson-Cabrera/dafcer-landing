@@ -42,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     duration: 1.2,
                     stagger: 0.2,
                     ease: "power4.out",
-                    startAt: { y: 50, opacity: 0 }
+                    startAt: { y: 50, opacity: 0 },
+                    onComplete: () => {
+                        // Signal that hero entrance is done — promo modal listens for this
+                        window.dispatchEvent(new CustomEvent('dafcer:hero-ready'));
+                    }
                 }, "-=0.5");
         };
 
@@ -720,6 +724,120 @@ document.addEventListener('DOMContentLoaded', () => {
         // Close hotspot tooltips on content click
         modal.addEventListener('click', () => {
             document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+        });
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  CASA FUTURA — PROMOTIONAL MODAL (Post-preloader trigger)
+    //  Appears ~2s after the hero entrance animations complete.
+    // ═══════════════════════════════════════════════════════════════
+    const promoModal = document.getElementById('promo-modal');
+    if (promoModal && !sessionStorage.getItem('casa_futura_promo_shown')) {
+
+        const promoBackdrop = document.getElementById('promo-backdrop');
+        const promoCloseBtn = document.getElementById('promo-close');
+        const promoContent = document.getElementById('promo-content');
+        const promoDismiss = document.getElementById('promo-dismiss');
+        const promoReveals = promoModal.querySelectorAll('.promo-reveal');
+        let promoOpened = false;
+
+        // Listen for the hero entrance to finish, then wait 2s
+        window.addEventListener('dafcer:hero-ready', () => {
+            setTimeout(() => {
+                if (!promoOpened) {
+                    promoOpened = true;
+                    openPromo();
+                }
+            }, 2000);
+        }, { once: true });
+
+        function openPromo() {
+            sessionStorage.setItem('casa_futura_promo_shown', 'true');
+
+            promoModal.classList.remove('hidden');
+            promoModal.classList.add('flex');
+            promoModal.style.pointerEvents = 'auto';
+            document.body.classList.add('modal-open');
+
+            const tl = gsap.timeline();
+
+            tl.to(promoBackdrop, {
+                opacity: 1,
+                duration: 0.45,
+                ease: 'power2.out'
+            })
+            .to(promoCloseBtn, {
+                opacity: 1,
+                pointerEvents: 'auto',
+                duration: 0.3
+            }, '-=0.2')
+            .to(promoContent, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.55,
+                ease: 'power3.out'
+            }, '-=0.3')
+            .to(promoReveals, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.08,
+                ease: 'power3.out'
+            }, '-=0.3');
+        }
+
+        function closePromo() {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    promoModal.classList.add('hidden');
+                    promoModal.classList.remove('flex');
+                    promoModal.style.pointerEvents = 'none';
+                    document.body.classList.remove('modal-open');
+
+                    // Reset positions for potential re-trigger (not needed for session, but clean)
+                    gsap.set(promoContent, { opacity: 0, y: 8, scale: 0.97 });
+                    gsap.set(promoReveals, { opacity: 0, y: 16 });
+                    gsap.set(promoCloseBtn, { opacity: 0, pointerEvents: 'none' });
+                }
+            });
+
+            tl.to(promoReveals, {
+                opacity: 0,
+                y: -8,
+                duration: 0.2,
+                stagger: 0.03,
+                ease: 'power2.in'
+            })
+            .to(promoContent, {
+                opacity: 0,
+                y: 20,
+                scale: 0.97,
+                duration: 0.3,
+                ease: 'power2.in'
+            }, '-=0.1')
+            .to(promoCloseBtn, {
+                opacity: 0,
+                pointerEvents: 'none',
+                duration: 0.2
+            }, '-=0.1')
+            .to(promoBackdrop, {
+                opacity: 0,
+                duration: 0.4,
+                ease: 'power2.inOut'
+            }, '-=0.1');
+        }
+
+        // Close handlers
+        promoCloseBtn.addEventListener('click', closePromo);
+        promoDismiss.addEventListener('click', closePromo);
+        promoBackdrop.addEventListener('click', closePromo);
+
+        // Escape key — only close promo if it's open
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && promoOpened && !promoModal.classList.contains('hidden')) {
+                closePromo();
+            }
         });
     }
 

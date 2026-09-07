@@ -73,12 +73,16 @@ const projectsData = {
             {
                 src: 'assets/img/Proyecto_PH3.png',
                 hotspots: [
-                    { x: 60, y: 50, text: 'Iluminación LED profesional para competición.' }
+                    { x: 60, y: 55, text: 'Barra tipo insdustrial' },
+                    { x: 50, y: 10, text: 'Ciel0 raso tipo industrial' }
                 ]
             },
             {
                 src: 'assets/img/Proyecto_PH4.png',
-                hotspots: []
+                hotspots: [
+                    { x: 80, y: 35, text: 'Aberturas panorámicas Blindex' },
+                    { x: 60, y: 80, text: 'Porcelanato Premium Pulido' }
+                ]
             }
         ]
     },
@@ -111,11 +115,11 @@ const projectsData = {
                     { x: 40, y: 35, text: 'Acabado Premium de paredes' },
                     { x: 60, y: 70, text: 'Piso flotante' }
                 ]
-            },
+            }/*,
             {
                 src: 'assets/img/Proyecto-Spusa2.png',
                 hotspots: []
-            }
+            }*/
         ]
     },
     'castanos': {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
 <head>
@@ -8,19 +8,34 @@
     <meta name="description"
         content="Casa Futura by DAFCER: viviendas de construcciÃ³n tradicional en lotes P.H. desde 120 mÂ². DiseÃ±o inteligente, calidad constructiva y funcionalidad.">
 
-    <!-- â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
-         â•‘  PRE-LAUNCH PROTECTION & TEAM PREVIEW ACCESS                     â•‘
-         â•‘  Actualizar launchDate para cada nuevo pre-lanzamiento           â•‘
-         â•‘  Acceso equipo: casa-futura.html?preview=dafcer                  â•‘
-         â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  PRE-LAUNCH PROTECTION & TEAM PREVIEW ACCESS                     ║
+         ║  - En localhost/desarrollo: acceso total sin restricciones.     ║
+         ║  - En producción: requiere ?preview=dafcer (permanente)          ║
+         ║  - Para salir del modo equipo: ?preview=logout                   ║
+         ║  Fecha objetivo de lanzamiento: 04 Oct 2026 12:00 AR             ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
     <script>
         (function () {
             var launchDate = new Date('2026-10-04T12:00:00');
+            var isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
             var urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get('preview') === 'logout') {
+                localStorage.removeItem('dafcer_preview');
+                sessionStorage.removeItem('dafcer_preview');
+                window.location.replace('coming-soon.html');
+                return;
+            }
+
             if (urlParams.get('preview') === 'dafcer') {
+                localStorage.setItem('dafcer_preview', 'true');
                 sessionStorage.setItem('dafcer_preview', 'true');
             }
-            if (new Date() < launchDate && !sessionStorage.getItem('dafcer_preview')) {
+
+            var isTeam = isLocal || localStorage.getItem('dafcer_preview') === 'true' || sessionStorage.getItem('dafcer_preview') === 'true';
+
+            if (new Date() < launchDate && !isTeam) {
                 window.location.replace('coming-soon.html');
             }
         })();
@@ -89,7 +104,7 @@
                         class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                Casa Futura
+                Venta en pozo
             </a>
             <a href="#contacto"
                 class="bg-primary text-dark px-8 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm text-xs tracking-widest">CONTACTO</a>
@@ -127,7 +142,7 @@
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
             </span>
-            Casa Futura
+            Venta en pozo
         </a>
         <a href="#contacto"
             class="text-3xl md:text-4xl font-display font-extrabold text-white/50 uppercase">Contacto</a>
@@ -168,7 +183,7 @@
 
         <!-- Scroll Indicator -->
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 cf-reveal">
-            <span class="text-[9px] uppercase tracking-[0.4em] text-white/40">DescubrÃ­ mÃ¡s</span>
+            <span class="text-[9px] uppercase tracking-[0.4em] text-white/40">Descubrí mas</span>
             <div class="w-[1px] h-12 bg-white/10 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-full bg-primary animate-scroll"></div>
             </div>
@@ -248,7 +263,7 @@
 
                     <!-- Description -->
                     <p class="text-base md:text-lg font-body font-light leading-relaxed text-white/55 cf-reveal">
-                        Un proyecto exclusivo de DAFCER diseÃ±ado para quienes buscan acceder a su primera vivienda
+                        Un proyecto exclusivo de DAFCER diseñado para quienes buscan acceder a su primera vivienda
                         con la solidez y la calidad que nos distingue.
                     </p>
 
@@ -288,7 +303,7 @@
                             </div>
                             <span
                                 class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Lotes
-                                en P.H. desde 100 mÂ² aprox</span>
+                                en P.H. desde 100 m² aprox</span>
                         </div>
 
                         <div class="casa-futura-item flex items-center gap-4 group cursor-default">
@@ -304,7 +319,7 @@
                             </div>
                             <span
                                 class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">66
-                                mÂ² cubiertos
+                                m² cubiertos
                             </span>
                         </div>
 
@@ -361,7 +376,7 @@
                                 </svg>
                             </div>
                             <span
-                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">BaÃ±o</span>
+                                class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Baño</span>
                         </div>
 
                         <div class="casa-futura-item flex items-center gap-4 group cursor-default">
@@ -390,12 +405,14 @@
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round"
                                     class="text-primary/80 group-hover:text-dark transition-colors">
-                                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"></path>
+                                    <path
+                                        d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z">
+                                    </path>
                                 </svg>
                             </div>
                             <span
                                 class="text-sm text-white/80 font-medium tracking-wide group-hover:text-white transition-colors">Sistema
-                                de calefacciÃ³n por losa radiante
+                                de calefacción por losa radiante
                             </span>
                         </div>
                     </div>
@@ -421,6 +438,108 @@
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Visual Showcase: 3D Architectural Plans (Side by Side) -->
+            <div class="mt-16 md:mt-24 pt-12 border-t border-white/10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+
+                    <!-- Plan 1: Planta con Distribución de Ambientes -->
+                    <div
+                        class="casa-futura-frame relative p-3 md:p-5 bg-white/[0.02] border border-white/10 rounded-sm overflow-hidden group transition-all duration-700 hover:border-primary/40 flex flex-col justify-between">
+                        <!-- Corner Crosshairs -->
+                        <div
+                            class="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+
+                        <!-- Top Technical Strip -->
+                        <div
+                            class="flex items-center justify-between border-b border-white/5 pb-3 mb-3 text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">
+                            <div class="flex items-center gap-2.5">
+                                <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                <span class="text-white/80 font-bold">01 // PLANO DE DISTRIBUCIÓN</span>
+                            </div>
+                            <span class="text-primary font-mono font-semibold">PLANTA TIPO</span>
+                        </div>
+
+                        <!-- Image Display Area -->
+                        <div
+                            class="relative bg-gradient-to-b from-[#141414] to-[#0d0d0d] rounded-sm p-4 md:p-6 flex items-center justify-center border border-white/5 overflow-hidden flex-grow min-h-[300px] md:min-h-[360px]">
+                            <!-- Blueprint subtle background grid -->
+                            <div class="absolute inset-0 opacity-15 pointer-events-none"
+                                style="background-image: linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 32px 32px;">
+                            </div>
+
+                            <img src="assets/img/plano3DVP.png"
+                                alt="Plano 3D con distribución de ambientes — Casa Futura"
+                                class="relative z-10 w-full h-auto max-h-[420px] object-contain transition-transform duration-700 group-hover:scale-[1.02] drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)]">
+                        </div>
+
+                        <!-- Bottom Technical Strip -->
+                        <div
+                            class="flex items-center justify-between border-t border-white/5 pt-3 mt-3 text-[10px] font-mono uppercase tracking-[0.2em] text-white/50">
+                            <span>2 DORMITORIOS // 1 BAÑO</span>
+                            <span class="text-primary">66 M² CUBIERTOS</span>
+                        </div>
+                    </div>
+
+                    <!-- Plan 2: Vista Isométrica / Axonométrica Limpia -->
+                    <div
+                        class="casa-futura-frame relative p-3 md:p-5 bg-white/[0.02] border border-white/10 rounded-sm overflow-hidden group transition-all duration-700 hover:border-primary/40 flex flex-col justify-between">
+                        <!-- Corner Crosshairs -->
+                        <div
+                            class="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                        </div>
+
+                        <!-- Top Technical Strip -->
+                        <div
+                            class="flex items-center justify-between border-b border-white/5 pb-3 mb-3 text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">
+                            <div class="flex items-center gap-2.5">
+                                <span class="inline-block w-2 h-2 rounded-full bg-primary/70"></span>
+                                <span class="text-white/80 font-bold">02 // PERSPECTIVA AXONOMÉTRICA</span>
+                            </div>
+                            <span class="text-primary font-mono font-semibold">MODELO 3D</span>
+                        </div>
+
+                        <!-- Image Display Area -->
+                        <div
+                            class="relative bg-gradient-to-b from-[#141414] to-[#0d0d0d] rounded-sm p-4 md:p-6 flex items-center justify-center border border-white/5 overflow-hidden flex-grow min-h-[300px] md:min-h-[360px]">
+                            <!-- Blueprint subtle background grid -->
+                            <div class="absolute inset-0 opacity-15 pointer-events-none"
+                                style="background-image: linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 32px 32px;">
+                            </div>
+
+                            <img src="assets/img/plano3DVP2.png" alt="Perspectiva 3D axonométrica — Casa Futura"
+                                class="relative z-10 w-full h-auto max-h-[420px] object-contain transition-transform duration-700 group-hover:scale-[1.02] drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)]">
+                        </div>
+
+                        <!-- Bottom Technical Strip -->
+                        <div
+                            class="flex items-center justify-between border-t border-white/5 pt-3 mt-3 text-[10px] font-mono uppercase tracking-[0.2em] text-white/50">
+                            <span>VISTA VOLUMÉTRICA</span>
+                            <span class="text-primary">CONSTRUCCIÓN TRADICIONAL</span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
@@ -536,7 +655,8 @@
                     <a href="index.html" class="inline-block mb-8">
                         <img src="assets/img/logo.svg" alt="DAFCER" class="h-16 w-auto">
                     </a>
-                    <p class="text-accent">Dedicados a elevar los estÃ¡ndares de la construcciÃ³n moderna a travÃ©s de la
+                    <p class="text-accent">Dedicados a elevar los estÃ¡ndares de la construcciÃ³n moderna a travÃ©s de
+                        la
                         innovaciÃ³n y la excelencia tÃ©cnica.</p>
                 </div>
 

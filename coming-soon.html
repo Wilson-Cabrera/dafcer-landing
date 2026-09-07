@@ -9,15 +9,30 @@
         content="DAFCER Construcciones y servicios. Muy pronto, una nueva experiencia digital. Registrate para ser el primero en saberlo.">
 
     <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  AUTO-LAUNCH: redirect to homepage when date arrives    ║
-         ║  Actualizar launchDate para cada nuevo pre-lanzamiento  ║
+         ║  AUTO-LAUNCH & TEAM PREVIEW CONTROLLER                   ║
+         ║  - En fecha de lanzamiento: redirige a la home           ║
+         ║  - Con ?preview=dafcer: activa equipo y entra a la home  ║
+         ║  - Con ?preview=logout: desactiva modo equipo            ║
          ╚══════════════════════════════════════════════════════════╝ -->
     <script>
         (function () {
             var launchDate = new Date('2026-10-04T12:00:00');
+            var urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get('preview') === 'logout') {
+                localStorage.removeItem('dafcer_preview');
+                sessionStorage.removeItem('dafcer_preview');
+            }
+
+            if (urlParams.get('preview') === 'dafcer') {
+                localStorage.setItem('dafcer_preview', 'true');
+                sessionStorage.setItem('dafcer_preview', 'true');
+                window.location.replace('index.html');
+                return;
+            }
+
             if (new Date() >= launchDate) {
-                // Launch date reached — go straight to the homepage
-                window.location.replace('/');
+                window.location.replace('index.html');
             }
         })();
     </script>
@@ -546,6 +561,34 @@
                     btn.classList.remove('bg-white', 'bg-red-500');
                 }, 3000);
             });
+
+            // ── Acceso de equipo desde el logo ──────────────────────────
+            const logoEl = document.getElementById('cs-logo');
+            let logoClicks = 0;
+            if (logoEl) {
+                logoEl.style.cursor = 'pointer';
+                logoEl.setAttribute('title', 'DAFCER');
+                logoEl.addEventListener('click', () => {
+                    const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+                    const isSaved = localStorage.getItem('dafcer_preview') === 'true';
+                    if (isLocal || isSaved) {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+                    logoClicks++;
+                    if (logoClicks >= 3) {
+                        const pass = prompt('Clave de acceso equipo DAFCER:');
+                        if (pass && pass.toLowerCase().trim() === 'dafcer') {
+                            localStorage.setItem('dafcer_preview', 'true');
+                            sessionStorage.setItem('dafcer_preview', 'true');
+                            window.location.href = 'index.html';
+                        } else if (pass) {
+                            alert('Clave incorrecta.');
+                        }
+                        logoClicks = 0;
+                    }
+                });
+            }
         });
     </script>
 </body>
