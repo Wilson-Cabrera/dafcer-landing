@@ -10,18 +10,22 @@
 
     <!-- Open Graph / WhatsApp / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dafcer.com/casa-futura.html">
     <meta property="og:title" content="Casa Futura | DAFCER — Servicio Exclusivo">
     <meta property="og:description"
         content="Viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
-    <meta property="og:image" content="assets/img/casafutura.webp">
+    <meta property="og:image" content="assets/img/og-casafutura.jpg">
+    <meta property="og:image:secure_url" content="assets/img/og-casafutura.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Casa Futura DAFCER">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Casa Futura | DAFCER — Servicio Exclusivo">
     <meta name="twitter:description"
         content="Viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
-    <meta name="twitter:image" content="assets/img/casafutura.webp">
+    <meta name="twitter:image" content="assets/img/og-casafutura.jpg">
 
     <!-- ╔══════════════════════════════════════════════════════════════════╗
          ║  PRE-LAUNCH PROTECTION & TEAM PREVIEW ACCESS                     ║
@@ -138,13 +142,6 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu"
         class="fixed inset-0 z-[49] bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500">
-        <button class="absolute top-8 right-8 text-4xl text-white" id="menu-close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
         <a href="index.html"
             class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Inicio</a>
         <a href="index.html#servicios"
@@ -736,19 +733,26 @@
 
             // Mobile menu
             const menuToggle = document.getElementById('menu-toggle');
-            const menuClose = document.getElementById('menu-close');
             const mobileMenu = document.getElementById('mobile-menu');
+            let isMenuOpen = false;
+
+            const toggleMenu = (open) => {
+                isMenuOpen = open;
+                mobileMenu.classList.toggle('active', isMenuOpen);
+                if (isMenuOpen) {
+                    menuToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                } else {
+                    menuToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+                }
+                document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+            };
 
             if (menuToggle && mobileMenu) {
-                menuToggle.addEventListener('click', () => mobileMenu.classList.add('active'));
+                menuToggle.addEventListener('click', () => toggleMenu(!isMenuOpen));
             }
-            if (menuClose && mobileMenu) {
-                menuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
-            }
-            // Close mobile menu on link click
             if (mobileMenu) {
                 mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+                    link.addEventListener('click', () => toggleMenu(false));
                 });
             }
 

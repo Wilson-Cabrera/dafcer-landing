@@ -7,7 +7,7 @@
 
 ## 🎯 1. Instrucciones de Acceso Privado (Modo Equipo)
 
-Actualmente la plataforma cuenta con un sistema de **protección de pre-lanzamiento activo**, programado para el estreno público el **4 de octubre de 2026**.
+Actualmente la plataforma cuenta con un sistema de **protección de pre-lanzamiento activo**, programado para el estreno público el **21 de septiembre de 2026**.
 
 Cualquier persona del público general o competidores que ingrese a la dirección web solo verá la pantalla de cuenta regresiva (*"Próximamente"*). Para que ustedes y su equipo puedan explorar, auditar y validar la web completa, se ha habilitado un **enlace de bypass exclusivo**:
 
@@ -24,7 +24,7 @@ Cualquier persona del público general o competidores que ingrese a la direcció
 
 ## 🏛️ 2. Arquitectura de la Plataforma: ¿Qué contiene el sitio?
 
-La web de DAFCER fue concebida como una **experiencia digital inmersiva de alta gama**, pensada para transmitir solidez, elegancia y liderazgo en el rubro constructivo de Neuquén y la Patagonia.
+La web de DAFCER fue concebida como una **experiencia digital inmersiva**, pensada para transmitir solidez, elegancia y liderazgo en el rubro constructivo.
 
 ### A. Portada Cinemática Interactiva (Hero Canvas Sequence)
 * Al ingresar, verán un preloader con el isotipo de DAFCER y una barra de carga sincronizada con 96 fotogramas de alta resolución.
@@ -32,21 +32,21 @@ La web de DAFCER fue concebida como una **experiencia digital inmersiva de alta 
 
 ### B. Portafolio Seleccionado & Modal Interactivo con Hotspots
 * Se exhiben 4 obras emblemáticas de diferentes tipologías:
-  1. **Las Gemas** (Residencial en Plottier): 175 m², estilo minimalista y doble altura.
-  2. **Padel House Club** (Deportivo en Plottier): 1,200 m², estructura metálica y módulos panorámicos Blindex.
-  3. **Spusa** (Remodelación Corporativa en Neuquén Capital): 500 m², pisos flotantes y cielo raso técnico.
-  4. **Los Castaños** (Residencial en Neuquén): Terminaciones en Silestone Calacatta y aberturas de alta gama.
+  1. **Las Gemas** (Residencial en Plottier)
+  2. **Padel House Club** (Deportivo en Plottier)
+  3. **Spusa** (Remodelación Corporativa en Neuquén Capital)
+  4. **Los Castaños** (Residencial en Neuquén)
 * **Innovación en Fichas Técnicas (Hotspots):** Al hacer clic en cualquier obra, se abre una galería en pantalla completa. Sobre las fotografías se despliegan **puntos interactivos (*hotspots*)** que, al posar el cursor o tocarlos en el celular, revelan las especificaciones técnicas de los materiales y terminaciones de lujo aplicadas.
 
-### C. Showcase Audiovisual de Vanguardia
+### C. Showcase Audiovisual
 * Reproductor de video 16:9 integrado con recorrido 3D hiperrealista, botón magnético de reproducción y control visual depurado.
 
 ### D. Sección Nosotros y Metodología "Cómo Trabajamos"
 * Transparencia de costos, certificación de avances de obra y dirección técnica personalizada.
 * Testimonio destacado del proyecto Los Castaños y respaldo de más de 10 años de trayectoria.
 
-### E. Landing Page Especializada: "Casa Futura" (`casa-futura.html`)
-* Una página dedicada exclusivamente al nuevo modelo de vivienda unifamiliar en lote P.H.
+### E. Landing Page Especializada: "Venta en pozo" (`casa-futura.html`)
+* Una página dedicada exclusivamente al nuevo modelo/proyecto de vivienda en lote P.H.
 * Incluye especificaciones de 66 m² cubiertos, 2 dormitorios, vistas volumétricas y **planos 3D axonométricos**.
 * Cuenta con su propio formulario y llamado a la acción directo.
 
@@ -58,7 +58,7 @@ La web de DAFCER fue concebida como una **experiencia digital inmersiva de alta 
 
 ## ⚡ 3. Estándares Técnicos y de Rendimiento Aplicados
 
-Esta versión incorpora optimizaciones de ingeniería web de primer nivel internacional:
+Esta versión incorpora optimizaciones de ingeniería web de nivel internacional:
 * **Formato WebP de última generación:** Toda la biblioteca visual del sitio (más de 120 archivos entre fotos y fotogramas) fue convertida a WebP, reduciendo el peso de la web en más de un **60% (ahorro de 48 MB)** sin perder resolución ni fidelidad de color.
 * **Seguridad y privacidad (OWASP):** Implementación de cabeceras HTTP que protegen el sitio contra ataques de inyección, suplantación de identidad en iframes (*Clickjacking*) y garantizan navegación bajo HTTPS estricto.
 * **Compatibilidad Móvil (Responsive):** Menú de navegación lateral adaptativo y controles táctiles optimizados para smartphones (iPhone y Android).
@@ -74,11 +74,7 @@ Les sugerimos poner especial atención en:
 
 | Área a Revisar | Aspecto específico | Estado actual |
 |---|---|---|
-| **Textos y Datos Técnicos** | Superficie exacta del proyecto "Los Castaños". | Actualmente figura con el marcador provisional `--- m²` en el modal. |
-| **Canal de Contacto** | Correo electrónico de destino para las consultas del formulario. | Listo para asociar a la casilla oficial de DAFCER. |
-| **Contacto Inmediato** | Confirmar si desean incorporar un botón flotante de WhatsApp en la esquina inferior. | El enlace actual en el pie ya redirige al número oficial `+54 9 299 603-5875`. |
-| **Redes Sociales** | Enlaces en el pie de página a Instagram, Facebook y WhatsApp. | Operativos y vinculados a los perfiles actuales de la empresa. |
-| **Fotografías** | Selección de obras y perspectivas mostradas en la galería. | Aprobación de las imágenes exhibidas o reemplazo por nuevo material. |
+| **Textos y Datos Técnicos, fotografias y contactos** |
 
 ---
 
