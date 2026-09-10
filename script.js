@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const frameCount = 96; // Del 00 al 95 son 96 fotogramas
         const currentFrame = index => (
-            `assets/img/sequence/frame_${index.toString().padStart(2, '0')}.jpg`
+            `assets/img/sequence/frame_${index.toString().padStart(2, '0')}.webp`
         );
 
         const images = [];

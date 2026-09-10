@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "node server.js",
+    "optimize": "node scripts/optimize-images.js",
+    "webp": "node scripts/convert-to-webp.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
+}
