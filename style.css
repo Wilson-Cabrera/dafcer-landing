@@ -9,6 +9,8 @@
 
 /* Base Styles */
 html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     overflow-x: hidden;
 }
 
@@ -26,10 +28,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .intro-headline {
-    font-size: clamp(1.65rem, 6.8vw, 4.5rem);
-    line-height: 1.04;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.35rem, 5.7vw, 4.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .intro-headline {
+        font-size: clamp(3rem, 5.5vw, 4.5rem);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .intro-headline {
+        font-size: 4.5rem;
+    }
 }
 
 /* Custom Scrollbar */
