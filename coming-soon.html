@@ -304,10 +304,17 @@
         .countdown-date-tag {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.6rem;
             margin-top: 0.85rem;
-            padding-left: 5.25rem;
-            /* aligns with the units, after accent bar */
+            padding-left: 0;
+        }
+
+        @media (min-width: 768px) {
+            .countdown-date-tag {
+                justify-content: flex-start;
+                padding-left: 5.25rem;
+            }
         }
 
         .countdown-date-tag::before {
@@ -334,7 +341,7 @@
 
 <body class="bg-dark text-white font-body overflow-x-hidden">
 
-    <div class="relative h-screen w-full flex flex-col items-center justify-center px-6">
+    <div class="relative min-h-screen min-h-[100dvh] w-full flex flex-col items-center justify-center px-4 sm:px-6 py-8 md:py-12">
 
         <!-- Ken Burns Background Slider -->
         <div class="kb-slider" id="kb-slider">
@@ -360,13 +367,13 @@
                 EXCELENCIA</div>
         </div>
 
-        <!-- Logo — top-left branding anchor -->
-        <div id="cs-logo" class="absolute top-8 left-8 z-20 opacity-0">
-            <img src="assets/img/logo.svg" alt="DAFCER Logo" class="h-10 md:h-14 w-auto transform translate-x-[13%]">
+        <!-- Logo — branding anchor (Centered in document flow on mobile, pinned top-left on desktop) -->
+        <div id="cs-logo" class="relative md:absolute md:top-8 md:left-8 z-20 opacity-0 mb-6 md:mb-0 flex justify-center md:block w-full md:w-auto">
+            <img src="assets/img/logo.svg" alt="DAFCER Logo" class="h-9 sm:h-10 md:h-14 w-auto md:transform md:translate-x-[13%] mx-auto md:mx-0">
         </div>
 
         <!-- Main Content -->
-        <div class="relative z-10 flex flex-col items-center justify-between h-full w-full max-w-2xl py-10">
+        <div class="relative z-10 flex flex-col items-center justify-between w-full max-w-2xl my-auto">
 
             <!-- Top spacer (desktop) -->
             <div class="hidden md:block"></div>
@@ -380,9 +387,9 @@
 
                 <!-- Headline -->
                 <h1 id="cs-title"
-                    class="text-3xl md:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] mb-6 opacity-0">
+                    class="text-[1.55rem] sm:text-3xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tight leading-[1.05] mb-6 opacity-0 px-2">
                     EL FUTURO SE ESTÁ <br>
-                    <span class="text-transparent stroke-text">CONSTRUYENDO.</span>
+                    <span class="text-transparent stroke-text inline-block whitespace-nowrap">CONSTRUYENDO.</span>
                 </h1>
 
                 <!-- ===== COUNTDOWN TIMER ===== -->
