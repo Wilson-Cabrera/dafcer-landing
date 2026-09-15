@@ -306,6 +306,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
+    // 5a. Lite YouTube Embed (click-to-load)
+    // ==========================================
+
+    document.querySelectorAll('.lite-youtube').forEach(el => {
+        el.addEventListener('click', () => {
+            if (el.classList.contains('active')) return;
+
+            const videoId = el.dataset.videoid;
+            const params = el.dataset.params || '';
+            const iframe = document.createElement('iframe');
+
+            iframe.setAttribute('src', 
+                `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&${params}`);
+            iframe.setAttribute('title', 'YouTube video player');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 
+                'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+            iframe.setAttribute('allowfullscreen', '');
+
+            el.classList.add('active');
+            el.appendChild(iframe);
+        });
+    });
+
+    // ==========================================
     // 5b. Cinematic Video Showcase Section Logic
     // ==========================================
 
@@ -318,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('video-progress-bar');
     const videoRevealContainer = document.getElementById('video-reveal-container');
 
-    if (videoSection && video) {
+    if (videoSection) {
 
         // 1. ScrollTrigger Reveal for the whole section elements (animating to visible state)
         gsap.to(".reveal-video-text", {
@@ -344,6 +370,9 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1.6,
             ease: "power4.out"
         });
+
+    // --- Local video–specific logic (only when the HTML5 video element exists) ---
+    if (video) {
 
         // 2. Lazy Loading the Video on Scroll (Saves huge bandwidth)
         ScrollTrigger.create({
@@ -434,7 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: "power3.out"
             });
         });
-    }
+    } // end if (video)
+    } // end if (videoSection)
 
     // 6. Form Submission (Real via Formspree)
     const contactForm = document.getElementById('contact-form');
