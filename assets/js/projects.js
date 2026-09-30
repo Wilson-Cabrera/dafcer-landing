@@ -3,7 +3,7 @@
 // Es seguro editar estos textos sin riesgo de afectar el motor de animaciones (script.js).
 
 const projectsData = {
-    'aurora': {
+    'LasGemas': {
         title: 'Las Gemas',
         category: 'Residencial',
         location: 'Plottier, Neuquén',
@@ -46,7 +46,7 @@ const projectsData = {
             }
         ]
     },
-    'delta': {
+    'PadelHouse': {
         title: 'Padel House Club',
         category: 'Deportivo',
         location: 'Plottier, Neuquén',
@@ -86,7 +86,7 @@ const projectsData = {
             }
         ]
     },
-    'soho': {
+    'Spusa': {
         title: 'Spusa',
         category: 'Remodelación',
         location: 'Capital, Neuquén',
@@ -152,6 +152,41 @@ const projectsData = {
                 hotspots: [
                     { x: 72, y: 30, text: 'Ducha escocesa de hidromasaje' },
                     { x: 50, y: 80, text: 'Sanitario Ferrum' }
+                ]
+            }
+        ]
+    },
+    'Mega': {
+        title: 'Compañia Mega',
+        category: 'Corporativo',
+        location: 'Neuquén',
+        surface: '--- m²',
+        year: '2026',
+        description: 'Sistema de Corralitos de Seguridad para la Industria Petrolera.',
+        images: [
+            {
+                src: 'assets/img/Proyecto-Mega0.webp',
+                hotspots: [
+                    { x: 40, y: 30, text: 'Detalle 1 (placeholder)' },
+                    { x: 65, y: 55, text: 'Detalle 2 (placeholder)' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto-Mega1.webp',
+                hotspots: [
+                    { x: 50, y: 40, text: 'Detalle 3 (placeholder)' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto-Mega2.webp',
+                hotspots: [
+                    { x: 35, y: 50, text: 'Detalle 4 (placeholder)' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto-Mega3.webp',
+                hotspots: [
+                    { x: 55, y: 45, text: 'Detalle 5 (placeholder)' }
                 ]
             }
         ]
