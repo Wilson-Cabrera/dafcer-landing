@@ -165,28 +165,64 @@ const projectsData = {
         description: 'Sistema de Corralitos de Seguridad para la Industria Petrolera.',
         images: [
             {
-                src: 'assets/img/Proyecto-Mega0.webp',
-                hotspots: [
-                    { x: 40, y: 30, text: 'Detalle 1 (placeholder)' },
-                    { x: 65, y: 55, text: 'Detalle 2 (placeholder)' }
-                ]
-            },
-            {
-                src: 'assets/img/Proyecto-Mega1.webp',
-                hotspots: [
-                    { x: 50, y: 40, text: 'Detalle 3 (placeholder)' }
-                ]
-            },
-            {
                 src: 'assets/img/Proyecto-Mega2.webp',
                 hotspots: [
-                    { x: 35, y: 50, text: 'Detalle 4 (placeholder)' }
+                    { x: 50, y: 30, text: 'Pintura de señalización y protección industrial' }
                 ]
             },
             {
                 src: 'assets/img/Proyecto-Mega3.webp',
                 hotspots: [
-                    { x: 55, y: 45, text: 'Detalle 5 (placeholder)' }
+
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto-Mega1.webp',
+                hotspots: [
+                    { x: 35, y: 20, text: 'Estructuras en acero tubular' },
+                    { x: 65, y: 60, text: 'Estructuras en acero tubular' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto-Mega0.webp',
+                hotspots: [
+                    { x: 25, y: 45, text: 'Topes de rueda' }
+                ]
+            }
+        ]
+    },
+    'ProyectoTP': {
+        title: 'ProyectoTP',
+        category: 'Residencial',
+        location: 'Neuquén',
+        surface: '--- m²',
+        year: '2026',
+        description: 'Descripción del nuevo proyecto. Este texto será reemplazado con la información definitiva de la obra.',
+        images: [
+            {
+                src: 'assets/img/Proyecto_TP0.webp',
+                hotspots: [
+                    { x: 45, y: 35, text: 'Detalle constructivo 1' },
+                    { x: 70, y: 60, text: 'Detalle constructivo 2' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto_TP1.webp',
+                hotspots: [
+                    { x: 40, y: 45, text: 'Detalle constructivo 3' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto_TP2.webp',
+                hotspots: [
+                    { x: 55, y: 50, text: 'Detalle constructivo 4' },
+                    { x: 30, y: 70, text: 'Detalle constructivo 5' }
+                ]
+            },
+            {
+                src: 'assets/img/Proyecto_TP3.webp',
+                hotspots: [
+                    { x: 50, y: 40, text: 'Detalle constructivo 6' }
                 ]
             }
         ]
