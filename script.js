@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } // end if (video)
     } // end if (videoSection)
 
-    // 6. Form Submission (Real via Formspree)
+    // 6. Form Submission (Real via Formspree + WhatsApp Redirect)
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -475,6 +475,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const btn = contactForm.querySelector('button');
             const originalText = btn.innerText;
             const data = new FormData(contactForm);
+
+            // Armar mensaje de WhatsApp con los datos del formulario
+            const name = (data.get('name') || '').trim();
+            const email = (data.get('email') || '').trim();
+            const projectType = (data.get('project_type') || '').trim();
+            const message = (data.get('message') || '').trim();
+
+            const whatsappLines = [
+                'Hola DAFCER, les escribo desde la web para realizar una consulta:',
+                '',
+                `*Nombre:* ${name}`,
+                `*Email:* ${email}`,
+                projectType ? `*Tipo de Proyecto:* ${projectType}` : null,
+                message ? `*Mensaje:* ${message}` : null
+            ].filter(line => line !== null);
+
+            const whatsappUrl = `https://wa.me/5492996035875?text=${encodeURIComponent(whatsappLines.join('\n'))}`;
+
+            // Abrir WhatsApp directamente en el evento de usuario para evitar bloqueos de popups
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
             btn.innerText = "ENVIANDO...";
             btn.disabled = true;
@@ -867,6 +887,60 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && promoOpened && !promoModal.classList.contains('hidden')) {
                 closePromo();
+            }
+        });
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  LEGAL & PRIVACY MODAL
+    // ═══════════════════════════════════════════════════════════════
+    const legalModal = document.getElementById('legal-modal');
+    if (legalModal) {
+        const legalBackdrop = document.getElementById('legal-backdrop');
+        const legalContent = document.getElementById('legal-content');
+        const legalCloseBtn = document.getElementById('legal-close');
+        const legalAcceptBtn = document.getElementById('legal-accept');
+        const openLegalBtns = document.querySelectorAll('[data-open-legal]');
+        let isLegalOpen = false;
+
+        const openLegalModal = () => {
+            isLegalOpen = true;
+            legalModal.classList.remove('hidden');
+            legalModal.classList.add('flex');
+            legalModal.style.pointerEvents = 'auto';
+            document.body.classList.add('modal-open');
+
+            const tl = gsap.timeline();
+            tl.to(legalBackdrop, { opacity: 1, duration: 0.35, ease: 'power2.out' })
+                .to(legalContent, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power3.out' }, '-=0.2');
+        };
+
+        const closeLegalModal = () => {
+            if (!isLegalOpen) return;
+            isLegalOpen = false;
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    legalModal.classList.add('hidden');
+                    legalModal.classList.remove('flex');
+                    legalModal.style.pointerEvents = 'none';
+                    document.body.classList.remove('modal-open');
+                    gsap.set(legalContent, { y: 32, scale: 0.98 });
+                }
+            });
+
+            tl.to(legalContent, { opacity: 0, y: 20, scale: 0.98, duration: 0.25, ease: 'power2.in' })
+                .to(legalBackdrop, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, '-=0.1');
+        };
+
+        openLegalBtns.forEach(btn => btn.addEventListener('click', openLegalModal));
+        if (legalCloseBtn) legalCloseBtn.addEventListener('click', closeLegalModal);
+        if (legalAcceptBtn) legalAcceptBtn.addEventListener('click', closeLegalModal);
+        if (legalBackdrop) legalBackdrop.addEventListener('click', closeLegalModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isLegalOpen) {
+                closeLegalModal();
             }
         });
     }

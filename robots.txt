@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /coming-soon.html
+Disallow: /index_coming_soon.html
+
+Sitemap: https://www.dafcer.com.ar/sitemap.xml
