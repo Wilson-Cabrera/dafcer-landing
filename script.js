@@ -529,9 +529,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Smooth Scroll for all anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (!href || href === '#') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
                 window.scrollTo({
                     top: target.offsetTop - 80,
                     behavior: 'smooth'

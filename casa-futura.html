@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa Futura | DAFCER — Servicio Exclusivo</title>
     <meta name="description"
-        content="Casa Futura by DAFCER: viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
+        content="Casa Futura by DAFCER: viviendas de construcción tradicional en lotes P.H. desde 100 m² aprox. Diseño inteligente, calidad constructiva y funcionalidad.">
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="ArpAkaA2AstkKTzv67nbZOsvGtVRa9De8KIPkWjINxs" />
     <link rel="canonical" href="https://www.dafcer.com.ar/casa-futura.html">
@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://www.dafcer.com.ar/casa-futura.html">
     <meta property="og:title" content="Casa Futura | DAFCER — Servicio Exclusivo">
     <meta property="og:description"
-        content="Viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
+        content="Viviendas de construcción tradicional en lotes P.H. desde 100 m² aprox. Diseño inteligente, calidad constructiva y funcionalidad.">
     <meta property="og:image" content="https://www.dafcer.com.ar/assets/img/og-casafutura.jpg">
     <meta property="og:image:secure_url" content="https://www.dafcer.com.ar/assets/img/og-casafutura.jpg">
     <meta property="og:image:type" content="image/jpeg">
@@ -28,20 +28,19 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Casa Futura | DAFCER — Servicio Exclusivo">
     <meta name="twitter:description"
-        content="Viviendas de construcción tradicional en lotes P.H. desde 120 m². Diseño inteligente, calidad constructiva y funcionalidad.">
+        content="Viviendas de construcción tradicional en lotes P.H. desde 100 m² aprox. Diseño inteligente, calidad constructiva y funcionalidad.">
     <meta name="twitter:image" content="https://www.dafcer.com.ar/assets/img/og-casafutura.jpg">
 
     <!-- ╔══════════════════════════════════════════════════════════════════╗
          ║  PRE-LAUNCH PROTECTION & TEAM PREVIEW ACCESS                     ║
-         ║  - En localhost/desarrollo: acceso total sin restricciones.     ║
-         ║  - En producción: requiere ?preview=dafcer (permanente)          ║
-         ║  - Para salir del modo equipo: ?preview=logout                   ║
-         ║  Fecha objetivo de lanzamiento: 20 Oct 2026 12:00 AR             ║
+         ║  - Antes del lanzamiento: redirige a coming-soon.html            ║
+         ║  - Modo equipo: ?preview=dafcer (permanente)                     ║
+         ║  - Para volver a Coming Soon: ?preview=logout                    ║
+         ║  Fecha objetivo de lanzamiento: 18 Nov 2026 00:00 AR             ║
          ╚══════════════════════════════════════════════════════════════════╝ -->
     <script>
         (function () {
-            var launchDate = new Date('2026-10-20T12:00:00');
-            var isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+            var launchDate = new Date('2026-11-18T00:00:00-03:00');
             var urlParams = new URLSearchParams(window.location.search);
 
             if (urlParams.get('preview') === 'logout') {
@@ -56,7 +55,7 @@
                 sessionStorage.setItem('dafcer_preview', 'true');
             }
 
-            var isTeam = isLocal || localStorage.getItem('dafcer_preview') === 'true' || sessionStorage.getItem('dafcer_preview') === 'true';
+            var isTeam = localStorage.getItem('dafcer_preview') === 'true' || sessionStorage.getItem('dafcer_preview') === 'true';
 
             if (new Date() < launchDate && !isTeam) {
                 window.location.replace('coming-soon.html');
@@ -133,7 +132,7 @@
                 class="bg-primary text-dark px-8 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm text-xs tracking-widest">CONTACTO</a>
         </div>
 
-        <button class="md:hidden text-3xl" id="menu-toggle">
+        <button class="md:hidden text-3xl" id="menu-toggle" aria-label="Abrir menú de navegación">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -152,6 +151,8 @@
             class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Servicios</a>
         <a href="index.html#proyectos"
             class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Proyectos</a>
+        <a href="index.html#beneficios"
+            class="text-3xl md:text-4xl font-display font-extrabold hover:text-primary transition-colors uppercase">Nosotros</a>
         <a href="casa-futura.html"
             class="text-3xl md:text-4xl font-display font-extrabold text-primary transition-colors uppercase flex items-center gap-4">
             <span class="relative flex h-3 w-3">
@@ -256,7 +257,7 @@
                                 CF-2026</span>
                             <div class="w-[1px] h-3 bg-white/20"></div>
                             <span class="text-[9px] uppercase tracking-[0.2em] text-primary font-mono font-bold">P.H.
-                                120 m²</span>
+                                100 m²</span>
                         </div>
                     </div>
                 </div>
@@ -701,11 +702,11 @@
                         <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Social</h5>
                         <ul class="space-y-4 text-accent text-sm">
                             <li><a href="https://www.instagram.com/dafcer.servicios/" target="_blank"
-                                    class="hover:text-primary transition-colors">Instagram</a></li>
+                                    rel="noopener noreferrer" class="hover:text-primary transition-colors">Instagram</a></li>
                             <li><a href="https://wa.me/5492996035875" target="_blank"
-                                    class="hover:text-primary transition-colors">WhatsApp</a></li>
+                                    rel="noopener noreferrer" class="hover:text-primary transition-colors">WhatsApp</a></li>
                             <li><a href="https://www.facebook.com/share/1Ey2xsErUL/" target="_blank"
-                                    class="hover:text-primary transition-colors">Facebook</a></li>
+                                    rel="noopener noreferrer" class="hover:text-primary transition-colors">Facebook</a></li>
                         </ul>
                     </div>
                 </div>

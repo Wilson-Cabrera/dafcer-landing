@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://www.dafcer.com.ar/">
     <meta property="og:title" content="DAFCER | Próximamente — Una nueva experiencia digital">
     <meta property="og:description"
-        content="Expertos en construcción y en gestión de proyectos. Apertura oficial el 20 de Octubre de 2026.">
+        content="Expertos en construcción y en gestión de proyectos. Apertura oficial el 18 de Noviembre de 2026.">
     <meta property="og:image" content="https://www.dafcer.com.ar/assets/img/og-preview.jpg">
     <meta property="og:image:secure_url" content="https://www.dafcer.com.ar/assets/img/og-preview.jpg">
     <meta property="og:image:type" content="image/jpeg">
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DAFCER | Próximamente">
     <meta name="twitter:description"
-        content="Expertos en construcción y en gestión de proyectos. Apertura oficial el 20 de Octubre de 2026.">
+        content="Expertos en construcción y en gestión de proyectos. Apertura oficial el 18 de Noviembre de 2026.">
     <meta name="twitter:image" content="https://www.dafcer.com.ar/assets/img/og-preview.jpg">
 
     <!-- ╔══════════════════════════════════════════════════════════╗
@@ -39,11 +39,12 @@
          ╚══════════════════════════════════════════════════════════╝ -->
     <script>
         (function () {
-            var launchDate = new Date('2026-10-20T12:00:00');
+            var launchDate = new Date('2026-11-18T00:00:00-03:00');
             var urlParams = new URLSearchParams(window.location.search);
 
             if (urlParams.get('preview') === 'logout') {
                 localStorage.removeItem('dafcer_preview');
+                sessionStorage.setItem('dafcer_preview', 'false');
                 sessionStorage.removeItem('dafcer_preview');
             }
 
@@ -431,7 +432,7 @@
                     </div>
                     <!-- Launch date reference -->
                     <div class="countdown-date-tag">
-                        <span>Lanzamiento oficial — 20 Oct 2026</span>
+                        <span>Lanzamiento oficial — 18 Nov 2026</span>
                     </div>
                 </div>
 
@@ -502,8 +503,8 @@
 
 
             // ── Countdown Timer ───────────────────────────────────────────
-            // Target: October 20, 2026 at 12:00:00 (local time)
-            const launchDate = new Date('2026-10-20T12:00:00');
+            // Target: November 18, 2026 at 00:00:00 (Argentina time UTC-3)
+            const launchDate = new Date('2026-11-18T00:00:00-03:00');
 
             const elDays = document.getElementById('cd-days');
             const elHours = document.getElementById('cd-hours');
@@ -602,6 +603,8 @@
                     const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
                     const isSaved = localStorage.getItem('dafcer_preview') === 'true';
                     if (isLocal || isSaved) {
+                        localStorage.setItem('dafcer_preview', 'true');
+                        sessionStorage.setItem('dafcer_preview', 'true');
                         window.location.href = 'index.html';
                         return;
                     }

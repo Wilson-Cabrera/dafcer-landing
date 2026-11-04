@@ -14,9 +14,9 @@ const projectsData = {
             {
                 src: 'assets/img/Proyecto_LG0.webp',
                 hotspots: [
-                    { x: 65, y: 48, text: 'Abertura de aluminio Moderna 2 + DVH' },
-                    { x: 42, y: 60, text: 'Revestimiento plastico texturizado' },
-                    { x: 34, y: 27, text: 'Zingueria personalizada' }
+                    { x: 65, y: 48, text: 'Abertura de aluminio Módena 2 + DVH' },
+                    { x: 42, y: 60, text: 'Revestimiento plástico texturizado' },
+                    { x: 34, y: 27, text: 'Zinguería personalizada' }
                 ]
             },
             {
@@ -41,7 +41,7 @@ const projectsData = {
                     { x: 22, y: 45, text: 'Puertas OBLAK Premium' },
                     { x: 70, y: 40, text: 'Terminación interior Full Premium' },
                     { x: 50, y: 80, text: 'Porcelanato Premium Pulido' },
-                    { x: 50, y: 16, text: 'Iluminacion LED' }
+                    { x: 50, y: 16, text: 'Iluminación LED' }
                 ]
             }
         ]
@@ -66,7 +66,7 @@ const projectsData = {
                 src: 'assets/img/Proyecto_PH2.webp',
                 hotspots: [
                     { x: 55, y: 30, text: 'Estructura metálica' },
-                    { x: 25, y: 65, text: 'Canchas full panoramicas' },
+                    { x: 25, y: 65, text: 'Canchas full panorámicas' },
                     { x: 50, y: 90, text: 'Veredas en alfombra sintética' }
                 ]
             },
@@ -122,7 +122,7 @@ const projectsData = {
         title: 'Los Castaños',
         category: 'Residencial',
         location: 'Neuquén',
-        surface: '--- m²',
+        surface: 'A medida',
         year: '2025',
         description: 'Proyecto residencial de alta gama en una ubicación privilegiada. Diseño contemporáneo que combina amplitud, confort y calidad constructiva en cada detalle, con terminaciones premium y espacios pensados para el bienestar.',
         images: [
@@ -157,10 +157,10 @@ const projectsData = {
         ]
     },
     'Mega': {
-        title: 'Compañia Mega',
+        title: 'Compañía Mega',
         category: 'Corporativo',
         location: 'Neuquén',
-        surface: '--- m²',
+        surface: 'Planta Industrial',
         year: '2026',
         description: 'Sistema de Corralitos de Seguridad para la Industria Petrolera.',
         images: [
@@ -192,37 +192,41 @@ const projectsData = {
         ]
     },
     'ProyectoTP': {
-        title: 'ProyectoTP',
+        title: 'Proyecto Centro',
         category: 'Residencial',
         location: 'Neuquén',
-        surface: '--- m²',
-        year: '2026',
-        description: 'Descripción del nuevo proyecto. Este texto será reemplazado con la información definitiva de la obra.',
+        surface: '190 m²',
+        year: '2025',
+        description: 'Proyecto residencial que combina arquitectura contemporánea, diseño funcional y detalles de categoría. Cada espacio fue pensado para lograr un equilibrio entre estética, confort y calidad, incorporando materiales seleccionados, terminaciones premium y soluciones que realzan la identidad de la vivienda.',
         images: [
             {
                 src: 'assets/img/Proyecto_TP0.webp',
                 hotspots: [
-                    { x: 45, y: 35, text: 'Detalle constructivo 1' },
-                    { x: 70, y: 60, text: 'Detalle constructivo 2' }
+                    { x: 28, y: 58, text: 'Aberturas de diseño apaisado' },
+                    { x: 95, y: 35, text: 'Cámara de seguridad' },
+                    { x: 70, y: 65, text: 'Puerta de seguridad multianclaje' }
                 ]
             },
             {
                 src: 'assets/img/Proyecto_TP1.webp',
                 hotspots: [
-                    { x: 40, y: 45, text: 'Detalle constructivo 3' }
+                    { x: 30, y: 45, text: 'Aberturas de aluminio Módena con DVH' },
+                    { x: 60, y: 75, text: 'Amoblamiento a medida' },
+                    { x: 70, y: 58, text: 'Mesada de Silestone' }
                 ]
             },
             {
                 src: 'assets/img/Proyecto_TP2.webp',
                 hotspots: [
-                    { x: 55, y: 50, text: 'Detalle constructivo 4' },
-                    { x: 30, y: 70, text: 'Detalle constructivo 5' }
+                    { x: 45, y: 25, text: 'Espejo inteligente' },
+                    { x: 30, y: 70, text: 'Vanitory a medida con bacha integrada' }
                 ]
             },
             {
                 src: 'assets/img/Proyecto_TP3.webp',
                 hotspots: [
-                    { x: 50, y: 40, text: 'Detalle constructivo 6' }
+                    { x: 50, y: 40, text: 'Galería semicubierta con parrilla' },
+                    { x: 50, y: 20, text: 'Cubierta de techo oculto' }
                 ]
             }
         ]

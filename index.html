@@ -60,15 +60,14 @@
 
     <!-- ╔══════════════════════════════════════════════════════════════════╗
          ║  PRE-LAUNCH PROTECTION & TEAM PREVIEW ACCESS                     ║
-         ║  - En localhost/desarrollo: acceso total sin restricciones.     ║
-         ║  - En producción: requiere ?preview=dafcer (permanente)          ║
-         ║  - Para salir del modo equipo: ?preview=logout                   ║
-         ║  Fecha objetivo de lanzamiento: 20 Oct 2026 12:00 AR             ║
+         ║  - Antes del lanzamiento: redirige a coming-soon.html            ║
+         ║  - Modo equipo: ?preview=dafcer (permanente)                     ║
+         ║  - Para volver a Coming Soon: ?preview=logout                    ║
+         ║  Fecha objetivo de lanzamiento: 18 Nov 2026 00:00 AR             ║
          ╚══════════════════════════════════════════════════════════════════╝ -->
     <script>
         (function () {
-            var launchDate = new Date('2026-10-20T12:00:00');
-            var isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+            var launchDate = new Date('2026-11-18T00:00:00-03:00');
             var urlParams = new URLSearchParams(window.location.search);
 
             if (urlParams.get('preview') === 'logout') {
@@ -83,7 +82,7 @@
                 sessionStorage.setItem('dafcer_preview', 'true');
             }
 
-            var isTeam = isLocal || localStorage.getItem('dafcer_preview') === 'true' || sessionStorage.getItem('dafcer_preview') === 'true';
+            var isTeam = localStorage.getItem('dafcer_preview') === 'true' || sessionStorage.getItem('dafcer_preview') === 'true';
 
             if (new Date() < launchDate && !isTeam) {
                 window.location.replace('coming-soon.html');
@@ -176,7 +175,7 @@
                 class="bg-primary text-dark px-8 py-3 font-bold hover:bg-white transition-all duration-300 rounded-sm text-xs tracking-widest">CONTACTO</a>
         </div>
 
-        <button class="md:hidden text-3xl" id="menu-toggle">
+        <button class="md:hidden text-3xl" id="menu-toggle" aria-label="Abrir menú de navegación">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -222,7 +221,7 @@
         <!-- Technical Margin Data -->
         <div class="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 flex flex-col gap-24 hidden md:flex reveal">
             <div class="vertical-text text-[10px] uppercase tracking-[0.5em] text-white/30 font-mono">
-                Lat: 34.6037° S / Long: 58.3816° W
+                Lat: 38.9516° S / Long: 68.0591° W
             </div>
             <div class="vertical-text text-[10px] uppercase tracking-[0.5em] text-white/30 font-mono">
                 Identity: DAFCER.v2.2026
@@ -375,7 +374,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Residencial"
                 data-project-id="LasGemas">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto_LG0.webp" alt="Residencia Aurora"
+                    <img src="assets/img/Proyecto_LG0.webp" alt="Las Gemas — Proyecto Residencial DAFCER"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -396,7 +395,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Comercial"
                 data-project-id="PadelHouse">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto_PH.webp" alt="Torre Corporativa Delta"
+                    <img src="assets/img/Proyecto_PH.webp" alt="Padel House Club — Complejo Deportivo DAFCER"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -417,7 +416,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Renovación"
                 data-project-id="Spusa">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto-Spusa0.webp" alt="Loft Industrial Soho"
+                    <img src="assets/img/Proyecto-Spusa0.webp" alt="SPUsa — Remodelación Corporativa DAFCER"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -438,7 +437,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Residencial"
                 data-project-id="castanos">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto_LC0.webp" alt="Los Castaños"
+                    <img src="assets/img/Proyecto_LC0.webp" alt="Los Castaños — Proyecto Residencial DAFCER"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -459,7 +458,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Corporativo"
                 data-project-id="Mega">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto-Mega2.webp" alt="Nuevo Proyecto"
+                    <img src="assets/img/Proyecto-Mega2.webp" alt="Compañía Mega — Infraestructura Industrial DAFCER"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -470,7 +469,7 @@
                 </div>
                 <div class="mt-8 flex justify-between items-start">
                     <div>
-                        <h4 class="text-3xl font-display font-bold mb-2">Compañia Mega</h4>
+                        <h4 class="text-3xl font-display font-bold mb-2">Compañía Mega</h4>
                         <span class="text-accent uppercase tracking-widest text-sm">Corporativo • 2026</span>
                     </div>
                 </div>
@@ -480,7 +479,7 @@
             <div class="project-card group cursor-pointer overflow-hidden" data-category="Residencial"
                 data-project-id="ProyectoTP">
                 <div class="relative overflow-hidden aspect-[16/10]">
-                    <img src="assets/img/Proyecto_TP0.webp" alt="Nuevo Proyecto"
+                    <img src="assets/img/Proyecto_TP0.webp" alt="Proyecto Centro — Residencial DAFCER"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -491,8 +490,8 @@
                 </div>
                 <div class="mt-8 flex justify-between items-start">
                     <div>
-                        <h4 class="text-3xl font-display font-bold mb-2">Nuevo Proyecto</h4>
-                        <span class="text-accent uppercase tracking-widest text-sm">Residencial • 2026</span>
+                        <h4 class="text-3xl font-display font-bold mb-2">Centro</h4>
+                        <span class="text-accent uppercase tracking-widest text-sm">Residencial • 2025</span>
                     </div>
                 </div>
             </div>
@@ -980,7 +979,8 @@
                                 </path>
                             </svg>
                         </div>
-                        <span class="text-xl font-bold group-hover:text-primary transition-colors">+54 9 2996 03-5875</span>
+                        <span class="text-xl font-bold group-hover:text-primary transition-colors">+54 9 2996
+                            03-5875</span>
                     </a>
                     <div class="flex items-center gap-6 group">
                         <div
@@ -1105,11 +1105,11 @@
                         <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Social</h5>
                         <ul class="space-y-4 text-accent text-sm">
                             <li><a href="https://www.instagram.com/dafcer.servicios/" target="_blank"
-                                    class="hover:text-primary transition-colors">Instagram</a></li>
+                                    rel="noopener noreferrer" class="hover:text-primary transition-colors">Instagram</a></li>
                             <li><a href="https://wa.me/5492996035875" target="_blank"
-                                    class="hover:text-primary transition-colors">WhatsApp</a></li>
+                                    rel="noopener noreferrer" class="hover:text-primary transition-colors">WhatsApp</a></li>
                             <li><a href="https://www.facebook.com/share/1Ey2xsErUL/" target="_blank"
-                                    class="hover:text-primary transition-colors">Facebook</a></li>
+                                    rel="noopener noreferrer" class="hover:text-primary transition-colors">Facebook</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1133,7 +1133,7 @@
         <div class="absolute inset-0 bg-dark/95 backdrop-blur-xl opacity-0" id="modal-backdrop"></div>
 
         <!-- Close Button -->
-        <button id="modal-close"
+        <button id="modal-close" aria-label="Cerrar proyecto"
             class="absolute top-6 right-6 md:top-10 md:right-12 z-50 text-white hover:text-primary transition-colors opacity-0 pointer-events-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1369,15 +1369,26 @@
         <div class="relative z-10 w-full max-w-3xl mx-auto opacity-0 translate-y-8 scale-[0.98]" id="legal-content">
             <div class="relative bg-dark border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
                 <!-- CAD Corner Crosshairs -->
-                <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary/50 z-20 pointer-events-none"></div>
-                <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary/50 z-20 pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary/50 z-20 pointer-events-none"></div>
-                <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary/50 z-20 pointer-events-none"></div>
+                <div
+                    class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                </div>
+                <div
+                    class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary/50 z-20 pointer-events-none">
+                </div>
+                <div
+                    class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary/50 z-20 pointer-events-none">
+                </div>
 
                 <!-- Header -->
-                <div class="flex items-center justify-between px-6 sm:px-10 py-6 border-b border-white/10 bg-white/[0.02]">
+                <div
+                    class="flex items-center justify-between px-6 sm:px-10 py-6 border-b border-white/10 bg-white/[0.02]">
                     <div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary block mb-1">Documento Oficial // DAFCER</span>
+                        <span
+                            class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary block mb-1">Documento
+                            Oficial // DAFCER</span>
                         <h3 class="text-xl sm:text-2xl font-display font-extrabold uppercase tracking-tight text-white">
                             Aviso Legal y Privacidad
                         </h3>
@@ -1396,51 +1407,93 @@
                 <!-- Scrollable Body -->
                 <div class="p-6 sm:p-10 overflow-y-auto space-y-6 text-sm text-white/70 font-light leading-relaxed">
                     <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">01. Identificación y Alcance</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">01.
+                            Identificación y Alcance</h4>
                         <p>
-                            El presente sitio web es operado por <strong class="text-white font-medium">DAFCER Construcciones y Servicios</strong> (con sede en Neuquén y cobertura nacional en la República Argentina, correo electrónico de contacto: <span class="text-white">info@dafcer.com</span>, teléfono: <span class="text-white">+54 9 2996 03-5875</span>). El acceso y navegación en este sitio implican la aceptación de las condiciones aquí expuestas.
+                            El presente sitio web es operado por <strong class="text-white font-medium">DAFCER
+                                Construcciones y Servicios</strong> (con sede en Neuquén y cobertura nacional en la
+                            República Argentina, correo electrónico de contacto: <span
+                                class="text-white">info@dafcer.com</span>, teléfono: <span class="text-white">+54 9 2996
+                                03-5875</span>). El acceso y navegación en este sitio implican la aceptación de las
+                            condiciones aquí expuestas.
                         </p>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">02. Carácter Ilustrativo de Imágenes, Renders y Planos</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">02. Carácter
+                            Ilustrativo de Imágenes, Renders y Planos</h4>
                         <p>
-                            Todas las imágenes, renders 3D, perspectivas axonométricas, planos de distribución, animaciones, medidas, superficies (tanto cubiertas como de lote) y especificaciones técnicas exhibidas en este sitio web —incluyendo el desarrollo <strong class="text-white font-medium">Casa Futura P.H.</strong> y los proyectos del portafolio— son de carácter estrictamente <strong class="text-white font-medium">ilustrativo, artístico y orientativo</strong>. Dichas representaciones pueden experimentar ajustes técnicos, estructurales o reglamentarios durante el proyecto ejecutivo y la dirección de obra, sin que ello constituya compromiso contractual.
+                            Todas las imágenes, renders 3D, perspectivas axonométricas, planos de distribución,
+                            animaciones, medidas, superficies (tanto cubiertas como de lote) y especificaciones técnicas
+                            exhibidas en este sitio web —incluyendo el desarrollo <strong
+                                class="text-white font-medium">Casa Futura P.H.</strong> y los proyectos del portafolio—
+                            son de carácter estrictamente <strong class="text-white font-medium">ilustrativo, artístico
+                                y orientativo</strong>. Dichas representaciones pueden experimentar ajustes técnicos,
+                            estructurales o reglamentarios durante el proyecto ejecutivo y la dirección de obra, sin que
+                            ello constituya compromiso contractual.
                         </p>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">03. Presupuestos y Consultas Comerciales</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">03.
+                            Presupuestos y Consultas Comerciales</h4>
                         <p>
-                            La información publicada en esta web y las consultas enviadas mediante el formulario de contacto o WhatsApp revisten carácter informativo y de asesoramiento preliminar. Ninguna publicación web constituye oferta vinculante. Todo presupuesto, plazo de ejecución, cómputo de materiales o condición comercial tendrá validez únicamente cuando sea emitido por escrito en una propuesta formal o contrato de obra suscripto por <strong class="text-white font-medium">DAFCER Construcciones y Servicios</strong>.
+                            La información publicada en esta web y las consultas enviadas mediante el formulario de
+                            contacto o WhatsApp revisten carácter informativo y de asesoramiento preliminar. Ninguna
+                            publicación web constituye oferta vinculante. Todo presupuesto, plazo de ejecución, cómputo
+                            de materiales o condición comercial tendrá validez únicamente cuando sea emitido por escrito
+                            en una propuesta formal o contrato de obra suscripto por <strong
+                                class="text-white font-medium">DAFCER Construcciones y Servicios</strong>.
                         </p>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">04. Propiedad Intelectual</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">04.
+                            Propiedad Intelectual</h4>
                         <p>
-                            El diseño del sitio, logotipos, marcas, textos, fotografías de obras ejecutadas, videos, renders y desarrollos técnicos son propiedad exclusiva de <strong class="text-white font-medium">DAFCER Construcciones y Servicios</strong> o cuentan con las licencias correspondientes para su exhibición. Queda prohibida su reproducción total o parcial, modificación o uso comercial sin autorización previa y por escrito.
+                            El diseño del sitio, logotipos, marcas, textos, fotografías de obras ejecutadas, videos,
+                            renders y desarrollos técnicos son propiedad exclusiva de <strong
+                                class="text-white font-medium">DAFCER Construcciones y Servicios</strong> o cuentan con
+                            las licencias correspondientes para su exhibición. Queda prohibida su reproducción total o
+                            parcial, modificación o uso comercial sin autorización previa y por escrito.
                         </p>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">05. Política de Privacidad y Datos Personales (Ley N° 25.326)</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">05. Política
+                            de Privacidad y Datos Personales (Ley N° 25.326)</h4>
                         <p>
-                            En cumplimiento de la Ley N° 25.326 de Protección de los Datos Personales de la República Argentina, informamos que los datos suministrados voluntariamente por el usuario a través del formulario de contacto o canales de atención (nombre, correo electrónico, teléfono y detalles del proyecto) serán tratados de manera estrictamente confidencial. Se utilizarán únicamente para responder consultas, elaborar cotizaciones y brindar asesoramiento técnico-comercial, no siendo cedidos ni comercializados a terceros. El titular de los datos podrá ejercer gratuitamente los derechos de acceso, rectificación o supresión escribiendo a <span class="text-white">info@dafcer.com</span>.
+                            En cumplimiento de la Ley N° 25.326 de Protección de los Datos Personales de la República
+                            Argentina, informamos que los datos suministrados voluntariamente por el usuario a través
+                            del formulario de contacto o canales de atención (nombre, correo electrónico, teléfono y
+                            detalles del proyecto) serán tratados de manera estrictamente confidencial. Se utilizarán
+                            únicamente para responder consultas, elaborar cotizaciones y brindar asesoramiento
+                            técnico-comercial, no siendo cedidos ni comercializados a terceros. El titular de los datos
+                            podrá ejercer gratuitamente los derechos de acceso, rectificación o supresión escribiendo a
+                            <span class="text-white">info@dafcer.com</span>.
                         </p>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">06. Uso de Cookies y Almacenamiento Técnico</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-primary mb-2 font-mono">06. Uso de
+                            Cookies y Almacenamiento Técnico</h4>
                         <p>
-                            Este sitio web utiliza únicamente almacenamiento técnico local del navegador (<span class="text-white">sessionStorage</span> / <span class="text-white">localStorage</span>) y recursos multimedia en modo de privacidad mejorada con el único fin de garantizar el correcto funcionamiento de la interfaz y optimizar la experiencia de navegación (por ejemplo, evitar mostrar avisos promocionales de forma repetitiva durante una misma sesión). El usuario puede configurar su navegador para bloquear o eliminar estos datos en cualquier momento sin afectar el acceso a los contenidos principales.
+                            Este sitio web utiliza únicamente almacenamiento técnico local del navegador (<span
+                                class="text-white">sessionStorage</span> / <span class="text-white">localStorage</span>)
+                            y recursos multimedia en modo de privacidad mejorada con el único fin de garantizar el
+                            correcto funcionamiento de la interfaz y optimizar la experiencia de navegación (por
+                            ejemplo, evitar mostrar avisos promocionales de forma repetitiva durante una misma sesión).
+                            El usuario puede configurar su navegador para bloquear o eliminar estos datos en cualquier
+                            momento sin afectar el acceso a los contenidos principales.
                         </p>
                     </div>
                 </div>
 
                 <!-- Footer -->
-                <div class="px-6 sm:px-10 py-4 border-t border-white/10 bg-white/[0.02] flex justify-between items-center">
-                    <span class="text-[10px] font-mono uppercase tracking-widest text-white/40">Última actualización: 2026</span>
+                <div
+                    class="px-6 sm:px-10 py-4 border-t border-white/10 bg-white/[0.02] flex justify-between items-center">
+                    <span class="text-[10px] font-mono uppercase tracking-widest text-white/40">Última actualización:
+                        2026</span>
                     <button type="button" id="legal-accept"
                         class="bg-primary text-dark px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300 cursor-pointer">
                         Entendido
